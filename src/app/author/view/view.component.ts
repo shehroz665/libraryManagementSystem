@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-view',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
+  constructor (private router:Router){}
   data:any[]= [
     {
       name: 'Russia',
@@ -48,4 +50,7 @@ export class ViewComponent {
       population: 1409517397,
     },
   ];
+  navigateToSpecificRoute(){
+    this.router.navigate(["author/add"]);
+  }
 }
