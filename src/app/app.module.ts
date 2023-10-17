@@ -9,9 +9,11 @@ import { BookModule } from './book/book.module';
 import { CategoryModule } from './category/category.module';
 import { StudentModule } from './student/student.module';
 import { TransactionModule } from './transaction/transaction.module';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
