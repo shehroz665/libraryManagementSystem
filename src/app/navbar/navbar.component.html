@@ -1,47 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-navy p-3">
-    <a class="navbar-brand text-white" routerLink="/">Library Management System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav" style="margin-left: auto;">
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/">Home</a>
-        </li>
-        <li class="nav-item dropdown" ngbDropdown>
-          <a class="nav-link dropdown-toggle text-white" ngbDropdownToggle routerLink="author/view">
-            Authors
-          </a>
-          <div ngbDropdownMenu>
-            <a class="dropdown-item" routerLink="author/add">Add Author</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown" ngbDropdown>
-          <a class="nav-link dropdown-toggle text-white" ngbDropdownToggle routerLink="category/view">
-            Categories
-          </a>
-          <div ngbDropdownMenu>
-            <a class="dropdown-item" routerLink="category/add">Add Category</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown" ngbDropdown>
-          <a class="nav-link dropdown-toggle text-white" ngbDropdownToggle routerLink="book/view">
-            Books
-          </a>
-          <div ngbDropdownMenu>
-            <a class="dropdown-item" routerLink="book/add">Add Book</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown" ngbDropdown>
-          <a class="nav-link dropdown-toggle text-white" ngbDropdownToggle routerLink="transaction/view">
-            Transactions
-          </a>
-          <div ngbDropdownMenu>
-            <a class="dropdown-item" routerLink="transaction/add">Add Transaction</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <router-outlet></router-outlet>
-  
+  <a class="navbar-brand text-white" routerLink="/">Library Management System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav" style="margin-left: auto;">
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="author/view">Authors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="category/view"> Categories</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="book/view">
+          Books
+        </a>
+
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="transaction/view">
+          Transactions
+        </a>
+
+      </li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
