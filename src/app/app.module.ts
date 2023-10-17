@@ -10,6 +10,7 @@ import { CategoryModule } from './category/category.module';
 import { StudentModule } from './student/student.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     CategoryModule,
     StudentModule,
     TransactionModule,
+    HttpClientModule
 
   ],
   providers: [],
