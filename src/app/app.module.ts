@@ -21,7 +21,8 @@ import { TransactionModule } from './transaction/transaction.module';
     BookModule,
     CategoryModule,
     StudentModule,
-    TransactionModule
+    TransactionModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
