@@ -1,1 +1,26 @@
-<p>update works!</p>
+<div class="container">
+    <div class="d-flex flex-column justify-content-center m-3 p-2 shadow-lg rounded">
+        <div class="d-flex justify-content-between">
+            <div class="p-2 text-black">
+                <h4>Update Author</h4>
+                <hr>
+            </div>
+        </div>
+        <div>
+            <form [formGroup]="authorFormData" (ngSubmit)="postData()">
+                <div class="form-group m-2">
+                    <label for="AuthName" class="mb-2">Author Name</label>
+                    <input
+                        #AuthName
+                        id="AuthName"
+                        name="AuthName"
+                        formControlName="AuthName"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="authName && authName.invalid && authName.touched">This field is required</span>
+                </div>
+                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;">Add</button>
+            </form>
+        </div>
+    </div>
+</div>

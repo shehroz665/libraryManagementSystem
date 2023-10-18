@@ -57,7 +57,9 @@ export class ViewComponent {
       this.authors=response.data;
     });
   }
-
+  goToUpdateView(id:number){
+    this.router.navigate(['author/update',id]);
+  }
   navigateToSpecificRoute(){
     this.router.navigate(["author/add"]);
   }
