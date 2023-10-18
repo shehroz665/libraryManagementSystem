@@ -1,1 +1,127 @@
-<p>addbook works!</p>
+<div class="container">
+    <div class="d-flex flex-column justify-content-center m-3 p-2 shadow-lg rounded">
+        <div class="d-flex justify-content-between">
+            <div class="p-2 text-black">
+                <h4>Add Author</h4>
+                <hr>
+            </div>
+        </div>
+        <div>
+            <form [formGroup]="bookFormData" (ngSubmit)="postData()">
+            <div class="d-flex flex-row ">
+                <div class="form-group m-2 w-50">
+                    <label for="Title" class="mb-2">Title</label>
+                    <input
+                        #Title
+                        id="Title"
+                        name="Title"
+                        formControlName="Title"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('Title') && getControl('Title')?.invalid && getControl('Title')?.touched">This field is required</span>
+                </div>
+                <div class="form-group m-2 w-50">
+                    <label for="Isbn" class="mb-2">ISBN</label>
+                    <input
+                        #Isbn
+                        type="number"
+                        id="Isbn"
+                        name="Isbn"
+                        formControlName="Isbn"
+                        class="form-control"
+                        maxlength="13"
+                    />
+                    <span style="color: red;" *ngIf="getControl('Isbn') && getControl('Isbn')?.invalid && getControl('Isbn')?.touched">This field is required and should have 13 digits</span>
+                </div>
+                <div class="form-group m-2 w-50">
+                    <label for="Isbn" class="mb-2">Price</label>
+                    <input
+                        #Price
+                        type="number"
+                        id="Price"
+                        name="Price"
+                        formControlName="Price"
+                        class="form-control"
+                        maxlength="13"
+                    />
+                    <span style="color: red;" *ngIf="getControl('Price') && getControl('Price')?.invalid && getControl('Price')?.touched">This field is required</span>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex flex-row ">
+                <div class="form-group m-2 w-50">
+                    <label for="Quanity" class="mb-2">Quanity</label>
+                    <input
+                        #Quanity
+                        type="number"
+                        id="Quanity"
+                        name="Quanity"
+                        formControlName="Quanity"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('Quanity') && getControl('Quanity')?.invalid && getControl('Quanity')?.touched">This field is required</span>
+                </div>
+                <div class="form-group m-2 w-50">
+                    <label for="ActualQuantity" class="mb-2">Actual Quantity</label>
+                    <input
+                        #ActualQuantity
+                        type="number"
+                        id="ActualQuantity"
+                        name="ActualQuantity"
+                        formControlName="ActualQuantity"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('ActualQuantity') && getControl('ActualQuantity')?.invalid && getControl('ActualQuantity')?.touched">This field is required</span>
+                </div>
+                <div class="form-group m-2 w-50">
+                    <label for="AvailableQuantity" class="mb-2">Available Quantity</label>
+                    <input
+                        #AvailableQuantity
+                        type="number"
+                        id="AvailableQuantity"
+                        name="AvailableQuantity"
+                        formControlName="AvailableQuantity"
+                        class="form-control"
+                        maxlength="13"
+                    />
+                    <span style="color: red;" *ngIf="getControl('AvailableQuantity') && getControl('AvailableQuantity')?.invalid && getControl('AvailableQuantity')?.touched">This field is required</span>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex flex-row">
+                <div class="form-group m-2 w-50">
+                    <label for="AutName" class="mb-2">Author</label>
+                    <select
+                        #AutName
+                        id="AutName"
+                        name="AutName"
+                        formControlName="AutName"
+                        class="form-control"
+                    >
+                    <option value="" disabled>Select Author</option>
+                    <option *ngFor="let author of authors" [value]="author.AuthId">{{author.AuthName}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="getControl('AutName') && getControl('AutName')?.invalid && getControl('AutName')?.touched">Please select an Author</span>
+                </div>
+                <div class="form-group m-2 w-50">
+                    <label for="CatName" class="mb-2">Category</label>
+                    <select
+                        #CatName
+                        id="CatName"
+                        name="CatName"
+                        formControlName="CatName"
+                        class="form-control"
+                    >
+                        <option value="" disabled>Select Category</option>
+                        <option *ngFor="let category of categories" [value]="category.CatId">{{category.CatName}}</option>
+
+                    </select>
+                    <span style="color: red;" *ngIf="getControl('CatName') && getControl('CatName')?.invalid && getControl('CatName')?.touched">Please select a Category</span>
+                </div>
+            </div>
+            <hr>
+                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;" [disabled]="bookFormData.invalid">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
