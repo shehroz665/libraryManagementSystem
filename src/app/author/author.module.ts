@@ -7,7 +7,7 @@ import { AddComponent } from './add/add.component';
 import { UpdateComponent } from './update/update.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     ViewComponent,
@@ -18,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AuthorRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ]
 })
 export class AuthorModule { }

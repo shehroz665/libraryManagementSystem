@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router'
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
-
+import { faTrash ,faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
+  updateIcon=faPenToSquare;
+  trashIcon=faTrash;
+  sizeIcon:SizeProp='1x';
   url:string=`https://localhost:7084/api/author/`;
   data:any[]= [
     {

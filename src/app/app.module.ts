@@ -12,6 +12,7 @@ import { TransactionModule } from './transaction/transaction.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     StudentModule,
     TransactionModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
 
   ],
   providers: [],
