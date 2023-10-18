@@ -1,0 +1,14 @@
+@media (max-width: 575px) {
+    .text-black {
+        font-size: 14px;
+    }
+    
+
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    .text-black {
+        font-size: 16px;
+    }
+    
+
+}

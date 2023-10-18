@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiMethodsService } from 'src/app/Services/api-methods.service';
 
 @Component({
   selector: 'app-viewcategory',
@@ -48,4 +49,12 @@ export class ViewcategoryComponent {
       population: 1409517397,
     },
   ];
+  url:string='https://localhost:7084/api/category';
+  categories:any[]=[];
+  constructor(private apiData:ApiMethodsService){
+    this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
+      this.categories=response.data;
+      console.log(this.categories);
+    })
+  }
 }
