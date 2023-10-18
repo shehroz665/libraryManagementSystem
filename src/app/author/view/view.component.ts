@@ -8,7 +8,7 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
-  url:string=`https://localhost:7084/api/author`;
+  url:string=`https://localhost:7084/api/author/`;
   data:any[]= [
     {
       name: 'Russia',
@@ -51,11 +51,10 @@ export class ViewComponent {
       population: 1409517397,
     },
   ];
-  author:any[]=[];
+  authors:any[]=[];
   constructor (private router:Router,private authorData:ApiMethodsService){
-    this.authorData.getDataFromApi(this.url).subscribe((data:any)=>{
-      this.author=data;
-      console.log(data);
+    this.authorData.getDataFromApi(this.url).subscribe((response:any)=>{
+      this.authors=response.data;
     });
   }
 
