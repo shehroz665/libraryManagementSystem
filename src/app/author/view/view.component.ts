@@ -13,50 +13,11 @@ export class ViewComponent {
   trashIcon=faTrash;
   sizeIcon:SizeProp='1x';
   url:string=`https://localhost:7084/api/author/`;
-  data:any[]= [
-    {
-      name: 'Russia',
-      area: 17075200,
-      population: 146989754,
-    },
-    {
-      name: 'Canada',
-      area: 9976140,
-      population: 36624199,
-    },
-    {
-      name: 'United States',
-      area: 9629091,
-      population: 324459463,
-    },
-    {
-      name: 'China',
-      area: 9596960,
-      population: 1409517397,
-    },
-    {
-      name: 'Russia',
-      area: 17075200,
-      population: 146989754,
-    },
-    {
-      name: 'Canada',
-      area: 9976140,
-      population: 36624199,
-    },
-    {
-      name: 'United States',
-      area: 9629091,
-      population: 324459463,
-    },
-    {
-      name: 'China',
-      area: 9596960,
-      population: 1409517397,
-    },
-  ];
   authors:any[]=[];
   constructor (private router:Router,private authorData:ApiMethodsService){
+    this.getAuthors();
+  }
+  getAuthors(){
     this.authorData.getDataFromApi(this.url).subscribe((response:any)=>{
       this.authors=response.data;
     });
@@ -66,5 +27,17 @@ export class ViewComponent {
   }
   navigateToSpecificRoute(){
     this.router.navigate(["author/add"]);
+  }
+  deleteAuthor(data:any){
+    var deleteUrl=this.url+`delete/${data.AuthId}`;
+    this.authorData.updateDataUsingApi(deleteUrl,{}).subscribe((response:any)=>{
+      if(response.statuscode===200){
+        this.authorData.successAlert(response.message);
+        this.getAuthors();
+      }
+      else{
+        this.authorData.errorAlert(response.message);
+      }
+    });
   }
 }
