@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-viewcategory',
   templateUrl: './viewcategory.component.html',
@@ -51,10 +51,13 @@ export class ViewcategoryComponent {
   ];
   url:string='https://localhost:7084/api/category';
   categories:any[]=[];
-  constructor(private apiData:ApiMethodsService){
+  constructor(private router:Router,private apiData:ApiMethodsService){
     this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
       this.categories=response.data;
       console.log(this.categories);
     })
+  }
+  navigateToSpecificRoute(){
+      this.router.navigate(['category/add']);
   }
 }

@@ -1,1 +1,26 @@
-<p>addcategory works!</p>
+<div class="container">
+    <div class="d-flex flex-column justify-content-center m-3 p-2 shadow-lg rounded">
+        <div class="d-flex justify-content-between">
+            <div class="p-2 text-black">
+                <h4>Add Category</h4>
+                <hr>
+            </div>
+        </div>
+        <div>
+            <form [formGroup]="categoryFormData" (ngSubmit)="postData()" >
+                <div class="form-group m-2">
+                    <label for="CatName" class="mb-2">Category Name</label>
+                    <input
+                        #AuthName
+                        id="CatName"
+                        name="CatName"
+                        formControlName="CatName"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="catName && catName.invalid && catName.touched">This field is required</span>
+                </div>
+                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
