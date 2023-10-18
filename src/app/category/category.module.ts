@@ -6,6 +6,8 @@ import { ViewcategoryComponent } from './viewcategory/viewcategory.component';
 import { AddcategoryComponent } from './addcategory/addcategory.component';
 import { UpdatecategoryComponent } from './updatecategory/updatecategory.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     CategoryRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    HttpClientModule,
   ]
 })
 export class CategoryModule { }

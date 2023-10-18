@@ -5,6 +5,9 @@ import { TransactionRoutingModule } from './transaction-routing.module';
 import { ViewtransactionComponent } from './viewtransaction/viewtransaction.component';
 import { AddtransactionComponent } from './addtransaction/addtransaction.component';
 import { UpdatetransactionComponent } from './updatetransaction/updatetransaction.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { UpdatetransactionComponent } from './updatetransaction/updatetransactio
   ],
   imports: [
     CommonModule,
-    TransactionRoutingModule
+    TransactionRoutingModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ]
 })
 export class TransactionModule { }

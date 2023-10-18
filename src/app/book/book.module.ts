@@ -5,7 +5,9 @@ import { BookRoutingModule } from './book-routing.module';
 import { ViewbooksComponent } from './viewbooks/viewbooks.component';
 import { AddbookComponent } from './addbook/addbook.component';
 import { UpdatebookComponent } from './updatebook/updatebook.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,10 @@ import { UpdatebookComponent } from './updatebook/updatebook.component';
   ],
   imports: [
     CommonModule,
-    BookRoutingModule
+    BookRoutingModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ]
 })
 export class BookModule { }

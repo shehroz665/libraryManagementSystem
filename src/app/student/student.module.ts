@@ -5,6 +5,9 @@ import { StudentRoutingModule } from './student-routing.module';
 import { ViewstudentComponent } from './viewstudent/viewstudent.component';
 import { AddstudentComponent } from './addstudent/addstudent.component';
 import { UpdatestudentComponent } from './updatestudent/updatestudent.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { UpdatestudentComponent } from './updatestudent/updatestudent.component'
   ],
   imports: [
     CommonModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ]
 })
 export class StudentModule { }
