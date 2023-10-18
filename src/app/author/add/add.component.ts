@@ -34,15 +34,9 @@ export class AddComponent {
         else {
           this.api.errorAlert(response.message);
         }
-
       })
-
     }
     else {
-      // Swal.fire({
-      //   icon: 'error',
-      //   text: 'Please fill the forms fields...',
-      // });
       this.api.errorAlert('Please fill the forms fields...');
     }
 
