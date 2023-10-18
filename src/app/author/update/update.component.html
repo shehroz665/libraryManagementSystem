@@ -7,7 +7,7 @@
             </div>
         </div>
         <div>
-            <form [formGroup]="authorFormData" (ngSubmit)="postData()">
+            <form [formGroup]="authorFormData" (ngSubmit)="updateData()">
                 <div class="form-group m-2">
                     <label for="AuthName" class="mb-2">Author Name</label>
                     <input
@@ -19,7 +19,7 @@
                     />
                     <span style="color: red;" *ngIf="authName && authName.invalid && authName.touched">This field is required</span>
                 </div>
-                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;">Add</button>
+                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;">Update</button>
             </form>
         </div>
     </div>

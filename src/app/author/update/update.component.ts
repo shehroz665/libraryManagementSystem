@@ -18,21 +18,33 @@ export class UpdateComponent {
     this.routeWithId.params.subscribe((param)=> {
       this.id=param['id'];
     })
+    if(this.id!=0){
+      var urlForGetAuthorByID=this.url+`/${this.id}`;
+      this.api.getDataFromApi(urlForGetAuthorByID).subscribe((response:any)=>{
+        if(response.statuscode===200){
+          this.authorFormData.patchValue({
+            AuthName: response.data.AuthName,
+          });
+        }
+        else{
+          this.api.errorAlert('Some error occured..!');
+        }
+      })
+    }
   }
-
+ 
   get authName() {
     return this.authorFormData.get('AuthName');
   }
-  postData() {
+  updateData() {
     if (this.authorFormData.value.AuthName !== '') {
+      var urlForPutMethod= `https://localhost:7084/api/author/update/${this.id}`
       var data = {
         AuthName: this.authorFormData.value.AuthName,
         Status: 1
       };
-      console.log(data);
-      this.api.postDataUsingApi(this.url, data).subscribe((response: any) => {
-        console.log(response);
-        if (response.statuscode === 201) {
+      this.api.updateDataUsingApi(urlForPutMethod, data).subscribe((response: any) => {
+        if (response.statuscode === 200) {
           this.api.successAlert(response.message);
           this.authorFormData.reset();
           this.router.navigate(['/author/view']);

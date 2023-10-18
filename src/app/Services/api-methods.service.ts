@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import Swal from 'sweetalert2'
+import { retry } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +13,9 @@ export class ApiMethodsService {
   }
   postDataUsingApi(url: string, data: any) {
     return this.http.post(url, data);
+  }
+  updateDataUsingApi(url:string,data:any){
+    return this.http.put(url,data);
   }
   successAlert(message: string) {
     return Swal.fire({
