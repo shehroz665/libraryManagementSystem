@@ -9,7 +9,6 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
   styleUrls: ['./addbook.component.css']
 })
 export class AddbookComponent {
-  url: string = 'https://localhost:7084/api/author';
   val:number=13;
   categories:any[]=[];
   authors:any[]=[];
@@ -25,11 +24,10 @@ export class AddbookComponent {
     Title:new FormControl('aa', [Validators.required]),
     BookCatId:new FormControl('', [Validators.required]),
     BookAuthId:new FormControl('', [Validators.required]),
-    Quanity:new FormControl(13, [Validators.required]),
-    Price:new FormControl(29, [Validators.required]), 
-    ActualQuantity:new FormControl(27, [Validators.required]),
-    AvailableQuantity:new FormControl(29, [Validators.required]),  
-    Isbn:new FormControl('1122334455113', [Validators.required,Validators.pattern(/^\d{13}$/)]),   
+    Price:new FormControl(2220, [Validators.required]), 
+    ActualQuantity:new FormControl(20, [Validators.required]),
+    AvailableQuantity:new FormControl(20, [Validators.required]),  
+    Isbn:new FormControl('1111222233334', [Validators.required,Validators.pattern(/^\d{13}$/)]),   
   });
 
   getControl(controlName:string) {
@@ -37,6 +35,7 @@ export class AddbookComponent {
   }
   postData() {
     var book =this.bookFormData.value;
+    
     var data={
       Title:book.Title,
       BookCatId:Number(book.BookCatId),
@@ -45,10 +44,14 @@ export class AddbookComponent {
       ActualQuantity:book.ActualQuantity,
       AvailableQuantity:book.AvailableQuantity,  
       Isbn:book.Isbn, 
+      Status:1,
     };
+    console.log('post book data',data);
+    
     this.api.postDataUsingApi('https://localhost:7084/api/books',data).subscribe((response:any)=> {
       if(response.statuscode===201){
         this.api.successAlert(response.message);
+        this.bookFormData.reset();
         this.router.navigate(['/book/view']);
       }
       else{

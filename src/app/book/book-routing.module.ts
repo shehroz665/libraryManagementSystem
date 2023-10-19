@@ -12,7 +12,7 @@ const routes: Routes = [
     path:'add',component:AddbookComponent
   },
   {
-    path:'update',component:UpdatebookComponent
+    path:'update/:id',component:UpdatebookComponent
   }
 ];
 
