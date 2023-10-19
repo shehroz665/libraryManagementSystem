@@ -3,6 +3,7 @@ import {Router} from '@angular/router'
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
 import { faTrash ,faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
+
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -19,7 +20,10 @@ export class ViewComponent {
   }
   getAuthors(){
     this.authorData.getDataFromApi(this.url).subscribe((response:any)=>{
-      this.authors=response.data;
+      this.authors=response.data.map((author:any)=> ({
+        ...author,
+        toggleValue:author.Status===1 ? true: false,
+      }));
     });
   }
   goToUpdateView(id:number){

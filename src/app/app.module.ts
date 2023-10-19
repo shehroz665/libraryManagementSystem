@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgToggleModule } from 'ng-toggle-button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TransactionModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgToggleModule
 
   ],
   providers: [],

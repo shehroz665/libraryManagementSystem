@@ -8,6 +8,7 @@ import { UpdateComponent } from './update/update.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgToggleModule } from 'ng-toggle-button';
 @NgModule({
   declarations: [
     ViewComponent,
@@ -19,7 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AuthorRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgToggleModule
   ]
 })
 export class AuthorModule { }

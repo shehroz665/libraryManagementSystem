@@ -30,6 +30,10 @@
                                     (click)="goToUpdateView(author.AuthId)"></fa-icon>
                                 <fa-icon class="m-1" [icon]="trashIcon" [style.color]="'rgb(195, 41, 41)'"
                                     (click)="deleteAuthor(author)"></fa-icon>
+                                <ng-toggle [value]="true" [color]="{
+                                    unchecked: '#939da2',
+                                    checked: '#f62d51'
+                                }"></ng-toggle>
                             </div>
                         </td>
                     </tr>
