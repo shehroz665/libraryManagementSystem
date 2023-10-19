@@ -13,14 +13,14 @@ export class ViewbooksComponent {
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
   sizeIcon:SizeProp='1x';
-  url:string=`https://localhost:7084/api/author/`;
-  authors:any[]=[];
+  url:string=`https://localhost:7084/api/books`;
+  books:any[]=[];
   constructor (private router:Router,private authorData:ApiMethodsService){
-    this.getAuthors();
+    this.getBooks();
   }
-  getAuthors(){
+  getBooks(){
     this.authorData.getDataFromApi(this.url).subscribe((response:any)=>{
-      this.authors=response.data;
+      this.books=response.data;      
     });
   }
   goToUpdateView(id:number){
@@ -29,12 +29,12 @@ export class ViewbooksComponent {
   navigateToSpecificRoute(){
     this.router.navigate(["book/add"]);
   }
-  deleteAuthor(data:any){
+  deleteBook(data:any){
     var deleteUrl=this.url+`delete/${data.AuthId}`;
     this.authorData.updateDataUsingApi(deleteUrl,{}).subscribe((response:any)=>{
       if(response.statuscode===200){
         this.authorData.successAlert(response.message);
-        this.getAuthors();
+        this.getBooks();
       }
       else{
         this.authorData.errorAlert(response.message);

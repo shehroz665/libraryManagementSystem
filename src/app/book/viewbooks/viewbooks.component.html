@@ -14,10 +14,10 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" class="text-center">Title</th>
-                        <th scope="col" class="text-center">ISBN</th>
-                        <th scope="col" class="text-center">Category</th>
-                        <th scope="col" class="text-center">Author</th>
+                        <th scope="col" class="text-left">Title</th>
+                        <th scope="col" class="text-left">ISBN</th>
+                        <th scope="col" class="text-left">Category</th>
+                        <th scope="col" class="text-left">Author</th>
                         <th scope="col" class="text-center">Price</th>
                         <th scope="col" class="text-center">Actual Q.</th>
                         <th scope="col" class="text-center">Avaiable Q.</th>
@@ -26,23 +26,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let author of authors;index as i">
-                        <th scope="row">{{ author.AuthId }}</th>
-                        <td class="text-center">{{ author.AuthName }}</td>
-                        <td class="text-center">1112223334445</td>
-                        <td class="text-center">{{ author.AuthName }}</td>
-                        <td class="text-center">{{ author.AuthName }}</td>
-                        <td class="text-center">{{ author.AuthName }}</td>
-                        <td class="text-center">{{ author.AuthName }}</td>
-                        <td class="text-center">{{ author.AuthName }}</td>
-                        <td class="text-center" [ngStyle]="{'color': author.Status===1? 'green' : 'red'}">{{
-                            author.Status===1? 'Active' :'Deactivated' }}</td>
+                    <tr *ngFor="let book of books;index as i">
+                        <th scope="row">{{ book.BookId }}</th>
+                        <td class="text-left">{{ book.Title }}</td>
+                        <td class="text-left">{{book.Isbn}}</td>
+                        <td class="text-left">{{ book.CatName }}</td>
+                        <td class="text-left">{{ book.AuthName }}</td>
+                        <td class="text-center">{{ book.Price }}</td>
+                        <td class="text-center">{{ book.ActualQuantity }}</td>
+                        <td class="text-center">{{ book.AvailableQuantity }}</td>
+                        <td class="text-center" [ngStyle]="{'color': book.Status===1? 'green' : 'red'}">{{
+                            book.Status===1? 'Active' :'Deactivated' }}</td>
                         <td class="text-center">
                             <div class="d-flex flex-row justify-content-center">
                                 <fa-icon [icon]="updateIcon" [size]="sizeIcon" [style.color]="'black'" class="m-1"
-                                    (click)="goToUpdateView(author.AuthId)"></fa-icon>
+                                    (click)="goToUpdateView(book.AuthId)"></fa-icon>
                                 <fa-icon class="m-1" [icon]="trashIcon" [style.color]="'rgb(195, 41, 41)'"
-                                    (click)="deleteAuthor(author)"></fa-icon>                                      
+                                    (click)="deleteBook(book)"></fa-icon>                                      
                             </div>
                         </td>
                     </tr>
