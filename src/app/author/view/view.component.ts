@@ -12,7 +12,6 @@ import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 export class ViewComponent {
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
-  sizeIcon:SizeProp='1x';
   url:string=`https://localhost:7084/api/author/`;
   authors:any[]=[];
   constructor (private router:Router,private authorData:ApiMethodsService){
