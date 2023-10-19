@@ -4,3 +4,9 @@ body{
     box-sizing: border-box;
     background-color: rgb(249, 254, 242);
 }
+.heading{
+    color: rgb(7, 51, 164);
+    text-decoration: underline;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

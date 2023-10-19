@@ -39,13 +39,13 @@ export class UpdatebookComponent {
     })
    }
   bookFormData = new FormGroup({
-    Title:new FormControl('aa', [Validators.required]),
+    Title:new FormControl('', [Validators.required]),
     BookCatId:new FormControl('', [Validators.required]),
     BookAuthId:new FormControl('', [Validators.required]),
-    Price:new FormControl(29, [Validators.required]), 
-    ActualQuantity:new FormControl(27, [Validators.required]),
-    AvailableQuantity:new FormControl(29, [Validators.required]),  
-    Isbn:new FormControl('1122334455113', [Validators.required,Validators.pattern(/^\d{13}$/)]),   
+    Price:new FormControl(0, [Validators.required]), 
+    ActualQuantity:new FormControl(0, [Validators.required]),
+    AvailableQuantity:new FormControl(0, [Validators.required]),  
+    Isbn:new FormControl('', [Validators.required,Validators.pattern(/^\d{13}$/)]),   
   });
 
   getControl(controlName:string) {
