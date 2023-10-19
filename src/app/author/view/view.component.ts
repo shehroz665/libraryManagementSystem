@@ -26,6 +26,18 @@ export class ViewComponent {
       }));
     });
   }
+  toggleChanged(id:number){
+    this.authorData.updateDataUsingApi(`https://localhost:7084/api/author/changeStatus/${id}`,{}).subscribe((response:any)=>{
+      if(response.statuscode===200){
+        this.authorData.successAlert(response.message);
+        this.getAuthors();
+      }
+      else{
+        this.authorData.errorAlert(response.message);
+      }
+    });
+    
+  }
   goToUpdateView(id:number){
     this.router.navigate(['author/update',id]);
   }
