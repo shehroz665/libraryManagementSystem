@@ -22,17 +22,17 @@
                     <tr *ngFor="let author of authors;index as i">
                         <th scope="row">{{ author.AuthId }}</th>
                         <td class="text-center">{{ author.AuthName }}</td>
-                        <td class="text-center" [ngStyle]="{'color': author.Status===1? 'green' : 'red'}">{{
+                        <td class="text-center" [ngStyle]="{'color': author.Status===1? '#067e00' : 'rgb(184, 16, 16)'}">{{
                             author.Status===1? 'Active' :'Deactivated' }}</td>
                         <td class="text-center">
                             <div class="d-flex flex-row justify-content-center">
                                 <fa-icon [icon]="updateIcon" [size]="sizeIcon" [style.color]="'black'" class="m-1"
                                     (click)="goToUpdateView(author.AuthId)"></fa-icon>
-                                <fa-icon class="m-1" [icon]="trashIcon" [style.color]="'rgb(195, 41, 41)'"
+                                <fa-icon class="m-1" [icon]="trashIcon" [style.color]="'rgb(184, 16, 16)'" 
                                     (click)="deleteAuthor(author)"></fa-icon>
-                                <ng-toggle [value]="true" [color]="{
-                                    unchecked: '#939da2',
-                                    checked: '#f62d51'
+                                <ng-toggle [value]="author.toggleValue" [color]="{
+                                    unchecked: 'rgb(184, 16, 16)',
+                                    checked: '#067e00',                       
                                 }"></ng-toggle>
                             </div>
                         </td>
