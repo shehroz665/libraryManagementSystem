@@ -50,18 +50,6 @@
             <hr>
             <div class="d-flex flex-row ">
                 <div class="form-group m-2 w-50">
-                    <label for="Quanity" class="mb-2">Quanity</label>
-                    <input
-                        #Quanity
-                        type="number"
-                        id="Quanity"
-                        name="Quanity"
-                        formControlName="Quanity"
-                        class="form-control"
-                    />
-                    <span style="color: red;" *ngIf="getControl('Quanity') && getControl('Quanity')?.invalid && getControl('Quanity')?.touched">This field is required</span>
-                </div>
-                <div class="form-group m-2 w-50">
                     <label for="ActualQuantity" class="mb-2">Actual Quantity</label>
                     <input
                         #ActualQuantity
@@ -90,33 +78,34 @@
             <hr>
             <div class="d-flex flex-row">
                 <div class="form-group m-2 w-50">
-                    <label for="AutName" class="mb-2">Author</label>
+                    <label for="BookAuthId" class="mb-2">Author</label>
                     <select
-                        #AutName
-                        id="AutName"
-                        name="AutName"
-                        formControlName="AutName"
+                        #BookAuthId
+                        id="BookAuthId"
+                        name="BookAuthId"
+                        formControlName="BookAuthId"
                         class="form-control"
                     >
                     <option value="" disabled>Select Author</option>
                     <option *ngFor="let author of authors" [value]="author.AuthId">{{author.AuthName}}</option>
                     </select>
-                    <span style="color: red;" *ngIf="getControl('AutName') && getControl('AutName')?.invalid && getControl('AutName')?.touched">Please select an Author</span>
+                    <span style="color: red;" *ngIf="getControl('BookAuthId') && getControl('BookAuthId')?.invalid && getControl('BookAuthId')?.touched">Please select an Author</span>
                 </div>
                 <div class="form-group m-2 w-50">
-                    <label for="CatName" class="mb-2">Category</label>
+                    <label for="BookCatId" class="mb-2">Category</label>
                     <select
-                        #CatName
-                        id="CatName"
-                        name="CatName"
-                        formControlName="CatName"
+                        #BookCatId
+                        id="BookCatId"
+                        name="BookCatId"
+                        formControlName="BookCatId"
                         class="form-control"
+                        
                     >
                         <option value="" disabled>Select Category</option>
                         <option *ngFor="let category of categories" [value]="category.CatId">{{category.CatName}}</option>
 
                     </select>
-                    <span style="color: red;" *ngIf="getControl('CatName') && getControl('CatName')?.invalid && getControl('CatName')?.touched">Please select a Category</span>
+                    <span style="color: red;" *ngIf="getControl('BookCatId') && getControl('BookCatId')?.invalid && getControl('BookCatId')?.touched">Please select a Category</span>
                 </div>
             </div>
             <hr>
