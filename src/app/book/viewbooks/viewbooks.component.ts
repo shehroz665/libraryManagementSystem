@@ -13,7 +13,7 @@ export class ViewbooksComponent {
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
   sizeIcon:SizeProp='1x';
-  url:string=`https://localhost:7084/api/books`;
+  url:string=`https://localhost:7084/api/books/`;
   books:any[]=[];
   constructor (private router:Router,private authorData:ApiMethodsService){
     this.getBooks();
@@ -30,7 +30,7 @@ export class ViewbooksComponent {
     this.router.navigate(["book/add"]);
   }
   deleteBook(data:any){
-    var deleteUrl=this.url+`delete/${data.AuthId}`;
+    var deleteUrl=this.url+`delete/${data.BookId}`;
     this.authorData.updateDataUsingApi(deleteUrl,{}).subscribe((response:any)=>{
       if(response.statuscode===200){
         this.authorData.successAlert(response.message);
