@@ -28,8 +28,9 @@ export class LoginComponent {
       userToken: ""
     }
     this.api.login('https://localhost:7084/login',data).subscribe((response:any)=> {
-      localStorage.setItem('token',response.data.UserToken);
+      
       if(response.statuscode===200){
+        localStorage.setItem('token',response.data.UserToken);
         this.api.successAlert(response.message);
         this.isLogin=false;
       }

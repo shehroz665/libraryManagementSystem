@@ -9,13 +9,16 @@ export class ApiMethodsService {
 
   constructor(private http: HttpClient) { }
   getDataFromApi(url: string) {
-    return this.http.get(url);
+    var headers=new HttpHeaders().set("Authorization",`bearer ${localStorage.getItem('token')}`);
+    return this.http.get(url,{headers});
   }
   postDataUsingApi(url: string, data: any) {
-    return this.http.post(url, data);
+    var headers=new HttpHeaders().set("Authorization",`bearer ${localStorage.getItem('token')}`);
+    return this.http.post(url, data,{headers});
   }
   updateDataUsingApi(url:string,data:any){
-    return this.http.put(url,data);
+    var headers=new HttpHeaders().set("Authorization",`bearer ${localStorage.getItem('token')}`);
+    return this.http.put(url,data,{headers});
   }
   login(url:string,data:any){
     return this.http.post(url, data);
