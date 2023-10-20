@@ -31,7 +31,7 @@ export class LoginComponent {
       localStorage.setItem('token',response.data.UserToken);
       if(response.statuscode===200){
         this.api.successAlert(response.message);
-        this.isLogin=true;
+        this.isLogin=false;
       }
       else{
         this.api.errorAlert(response.message);
