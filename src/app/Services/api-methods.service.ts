@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import Swal from 'sweetalert2'
 import { retry } from 'rxjs';
 @Injectable({
@@ -16,6 +16,9 @@ export class ApiMethodsService {
   }
   updateDataUsingApi(url:string,data:any){
     return this.http.put(url,data);
+  }
+  login(url:string,data:any){
+    return this.http.post(url, data);
   }
   successAlert(message: string) {
     return Swal.fire({
