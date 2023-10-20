@@ -8,7 +8,7 @@ import { UpdatecategoryComponent } from './updatecategory/updatecategory.compone
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgToggleModule } from 'ng-toggle-button';
 @NgModule({
   declarations: [
     ViewcategoryComponent,
@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
+    NgToggleModule
   ]
 })
 export class CategoryModule { }

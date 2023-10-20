@@ -8,7 +8,7 @@ import { UpdatebookComponent } from './updatebook/updatebook.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgToggleModule } from 'ng-toggle-button';
 @NgModule({
   declarations: [
     ViewbooksComponent,
@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FontAwesomeModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgToggleModule
   ]
 })
 export class BookModule { }

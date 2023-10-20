@@ -61,8 +61,23 @@ export class ViewcategoryComponent {
   }
   getCategory(){
     this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
-      this.categories=response.data;
+      this.categories=response.data.map((category:any)=>({
+        ...category,
+        toggleValue:category.Status===1 ? true : false
+      }));
     });
+  }
+  toggleChanged(id:number){
+    this.apiData.updateDataUsingApi(`https://localhost:7084/api/category/changeStatus/${id}`,{}).subscribe((response:any)=>{
+      if(response.statuscode===200){
+        this.apiData.successAlert(response.message);
+        this.getCategory();
+      }
+      else{
+        this.apiData.errorAlert(response.message);
+      }
+    });
+    
   }
   goToUpdate(id:number){
     this.router.navigate(['category/update',id]);

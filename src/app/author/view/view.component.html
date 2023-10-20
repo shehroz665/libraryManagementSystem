@@ -27,12 +27,12 @@
                         <td class="text-center">
                             <div class="d-flex flex-row justify-content-center">
                                 <div>
-                                    <fa-icon [icon]="updateIcon" style="font-size:23px" [style.color]="'black'" class="m-1"
+                                    <fa-icon [icon]="updateIcon" style="font-size:20px" [style.color]="'black'" class="m-1"
                                     (click)="goToUpdateView(author.AuthId)"></fa-icon> 
-                                <fa-icon class="m-1" [icon]="trashIcon" [style.color]="'rgb(184, 16, 16)'"  style="font-size:23px"
+                                <fa-icon class="m-1" [icon]="trashIcon" [style.color]="'rgb(184, 16, 16)'"  style="font-size:20px"
                                     (click)="deleteAuthor(author)"></fa-icon>
                                 </div>
-                                <div class="mt-1">
+                                <div >
                                     <ng-toggle [value]="author.toggleValue" [color]="{
                                         unchecked: 'rgb(184, 16, 16)',
                                         checked: '#067e00',                       

@@ -15,13 +15,28 @@ export class ViewbooksComponent {
   sizeIcon:SizeProp='1x';
   url:string=`https://localhost:7084/api/books/`;
   books:any[]=[];
-  constructor (private router:Router,private authorData:ApiMethodsService){
+  constructor (private router:Router,private api:ApiMethodsService){
     this.getBooks();
   }
   getBooks(){
-    this.authorData.getDataFromApi(this.url).subscribe((response:any)=>{
-      this.books=response.data;      
+    this.api.getDataFromApi(this.url).subscribe((response:any)=>{
+      this.books=response.data.map((book:any)=> ({
+        ...book,
+        toggleValue:book.Status===1 ? true : false
+      }));      
     });
+  }
+  toggleChanged(id:number){
+    this.api.updateDataUsingApi(`https://localhost:7084/api/books/changeStatus/${id}`,{}).subscribe((response:any)=>{
+      if(response.statuscode===200){
+        this.api.successAlert(response.message);
+        this.getBooks();
+      }
+      else{
+        this.api.errorAlert(response.message);
+      }
+    });
+    
   }
   goToUpdateView(id:number){
     this.router.navigate(['book/update',id]);
@@ -31,13 +46,13 @@ export class ViewbooksComponent {
   }
   deleteBook(data:any){
     var deleteUrl=this.url+`delete/${data.BookId}`;
-    this.authorData.updateDataUsingApi(deleteUrl,{}).subscribe((response:any)=>{
+    this.api.updateDataUsingApi(deleteUrl,{}).subscribe((response:any)=>{
       if(response.statuscode===200){
-        this.authorData.successAlert(response.message);
+        this.api.successAlert(response.message);
         this.getBooks();
       }
       else{
-        this.authorData.errorAlert(response.message);
+        this.api.errorAlert(response.message);
       }
     });
   }
