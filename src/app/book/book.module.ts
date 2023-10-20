@@ -9,11 +9,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgToggleModule } from 'ng-toggle-button';
+import { IsbnFormatterPipe } from '../Pipes/isbn-formatter.pipe';
 @NgModule({
   declarations: [
     ViewbooksComponent,
     AddbookComponent,
-    UpdatebookComponent
+    UpdatebookComponent,
+    IsbnFormatterPipe
   ],
   imports: [
     CommonModule,

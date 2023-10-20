@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
-
 @Component({
   selector: 'app-viewbooks',
   templateUrl: './viewbooks.component.html',

@@ -13,10 +13,10 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" class="text-left">Title</th>
-                        <th scope="col" class="text-left">ISBN</th>
-                        <th scope="col" class="text-left">Category</th>
-                        <th scope="col" class="text-left">Author</th>
+                        <th scope="col" class="text-center">Title</th>
+                        <th scope="col" class="text-center">ISBN</th>
+                        <th scope="col" class="text-center">Category</th>
+                        <th scope="col" class="text-center">Author</th>
                         <th scope="col" class="text-center">Price</th>
                         <th scope="col" class="text-center">Actual Q.</th>
                         <th scope="col" class="text-center">Avaiable Q.</th>
@@ -27,10 +27,10 @@
                 <tbody>
                     <tr *ngFor="let book of books;index as i">
                         <th scope="row">{{ book.BookId }}</th>
-                        <td class="text-left">{{ book.Title }}</td>
-                        <td class="text-left">{{book.Isbn}}</td>
-                        <td class="text-left">{{ book.CatName }}</td>
-                        <td class="text-left">{{ book.AuthName }}</td>
+                        <td class="text-center">{{ book.Title }}</td>
+                        <td class="text-center">{{book.Isbn | isbnFormatter}}</td>
+                        <td class="text-center">{{ book.CatName }}</td>
+                        <td class="text-center">{{ book.AuthName }}</td>
                         <td class="text-center">{{ book.Price }}</td>
                         <td class="text-center">{{ book.ActualQuantity }}</td>
                         <td class="text-center">{{ book.AvailableQuantity }}</td>
