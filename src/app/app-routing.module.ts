@@ -43,12 +43,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    redirectTo:'login',
+    pathMatch:'full'
   },
   {
     path: 'login',
@@ -57,7 +59,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: NavbarComponent,
-    children: [ // Define child routes for the 'home' route
+    children: [ 
       {
         path: 'author',
         loadChildren: () => import('./author/author.module').then((mob) => mob.AuthorModule)
@@ -78,8 +80,9 @@ const routes: Routes = [
         path: 'transaction',
         loadChildren: () => import('./transaction/transaction.module').then((mob) => mob.TransactionModule)
       },
-      // Add other child routes for the 'home' component as needed
+      
     ]
+    ,canActivate:[AuthGuard]
   },
 ];
 

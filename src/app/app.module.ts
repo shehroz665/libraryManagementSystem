@@ -15,11 +15,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgToggleModule } from 'ng-toggle-button';
 import { LoginComponent } from './auth/login/login.component';
+import { HomeComponent } from './home/home.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponent //newly added
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
