@@ -45,6 +45,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './shared/auth.guard';
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 
 const routes: Routes = [
   {
@@ -84,6 +85,10 @@ const routes: Routes = [
     ]
     ,canActivate:[AuthGuard]
   },
+  {
+    path:"**",
+    component:NopagefoundComponent
+  }
 ];
 
 @NgModule({

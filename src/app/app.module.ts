@@ -16,13 +16,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgToggleModule } from 'ng-toggle-button';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NopagefoundComponent
   ],
   imports: [
     BrowserModule,
