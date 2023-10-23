@@ -23,6 +23,9 @@ export class ApiMethodsService {
   login(url:string,data:any){
     return this.http.post(url, data);
   }
+  isLogin(){
+    return localStorage.getItem("token") || '';
+  }
   successAlert(message: string) {
     return Swal.fire({
       position: 'top-end',

@@ -32,7 +32,7 @@ export class LoginComponent {
       if(response.statuscode===200){
         localStorage.setItem('token',response.data.UserToken);
         this.api.successAlert(response.message);
-        this.router.navigate(['author/view']);
+        this.router.navigate(['home/author/view']);
         this.isLogin=false;
       }
       else{
