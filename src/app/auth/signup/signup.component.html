@@ -4,7 +4,7 @@
     <div class="container w-25">
       <div class="d-flex flex-column p-3 shadow-lg rounded bg-white">
         <div>
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="form-group m-2">
               <label for="email" class="mb-2">Email</label>
               <input
@@ -27,9 +27,23 @@
               />
               <span style="color: red;" *ngIf="getControl('password') && getControl('password')?.invalid && getControl('password')?.touched">This field is required</span>
             </div>
+            <div class="form-group m-2">
+                <label for="roleId" class="mb-2">Role</label>
+                <select
+                #roleId
+                id="roleId"
+                name="roleId"
+                formControlName="roleId"
+                class="form-control"
+                >
+                <option disabled value="">Select the role</option>
+                <option *ngFor="let role of roles" [value]="role.RoleId">{{role.RoleName}}</option>
+                </select>
+                <span style="color: red;" *ngIf="getControl('password') && getControl('password')?.invalid && getControl('password')?.touched">This field is required</span>
+              </div>
             <div class="d-flex flex-row justify-content-between">
               <div>
-                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;" [disabled]="loginForm.invalid">Sign Up</button>
+                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;" [disabled]="signupForm.invalid">Sign Up</button>
               </div>
               <div class="my-3">
                 <a routerLink="/login" class="text-black">Login</a>

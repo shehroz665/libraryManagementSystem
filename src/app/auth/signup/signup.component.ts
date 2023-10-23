@@ -9,28 +9,42 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  loginForm=new FormGroup({
+  roles:any[]= [
+    {
+      RoleId:2,
+      RoleName:"Student"
+    },
+    {
+      RoleId:3,
+      RoleName:"Teacher"
+    },
+]
+  signupForm=new FormGroup({
     email:new FormControl('',[Validators.required,Validators.email]),
-    password:new FormControl('',[Validators.required])
+    password:new FormControl('',[Validators.required]),
+    roleId:new FormControl('',[Validators.required])
   })
   constructor(private router:Router,private api:ApiMethodsService){}
   getControl(controlName:string){
-    return this.loginForm.get(controlName);
+    return this.signupForm.get(controlName);
   }
   onSubmit(){
-    var loginData=this.loginForm.value;
+    var signupData=this.signupForm.value;
+    const desiredRoleId = Number(this.signupForm.value.roleId);
+    const filteredRoleName = this.roles.filter(role => role.RoleId === desiredRoleId);
     var data={
-      email: loginData.email,
-      password: loginData.password,
+      Email: signupData.email,
+      Password: signupData.password,
       userMessage: "",
-      userToken: ""
+      userToken: "",
+      RoleId:signupData.roleId,
+      RoleName:filteredRoleName[0].RoleName
     }
-    this.api.login('https://localhost:7084/login',data).subscribe((response:any)=> {
+    this.api.login('https://localhost:7084/signUp',data).subscribe((response:any)=> {
       
-      if(response.statuscode===200){
-        localStorage.setItem('token',response.data.UserToken);
+      if(response.statuscode===201){
         this.api.successAlert(response.message);
-        this.router.navigate(['home/author/view']);
+        this.router.navigate(['/login']);
       }
       else{
         this.api.errorAlert(response.message);
