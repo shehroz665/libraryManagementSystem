@@ -27,9 +27,20 @@
                   />
                   <span style="color: red;" *ngIf="getControl('password') && getControl('password')?.invalid && getControl('password')?.touched">This field is required</span>
                 </div>
-                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;" [disabled]="loginForm.invalid">Login</button>
+                <div class="d-flex flex-row justify-content-between">
+                  <div>
+                    <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;" [disabled]="loginForm.invalid">Login</button>
+                  </div>
+                  <div class="my-3">
+                    <a routerLink="/signup" class="text-black">Sign Up</a>
+                  </div>
+                </div>
+              
+
+        
               </form>
             </div>
           </div>
         </div>
       </div>
+<router-outlet></router-outlet>

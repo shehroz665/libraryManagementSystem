@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent {
-  
-  isLogin:boolean=true;
+export class SignupComponent {
   loginForm=new FormGroup({
     email:new FormControl('',[Validators.required,Validators.email]),
     password:new FormControl('',[Validators.required])
@@ -25,9 +23,7 @@ export class LoginComponent {
       email: loginData.email,
       password: loginData.password,
       userMessage: "",
-      userToken: "",
-      roleId: 0,
-      roleName: ""
+      userToken: ""
     }
     this.api.login('https://localhost:7084/login',data).subscribe((response:any)=> {
       
@@ -35,7 +31,6 @@ export class LoginComponent {
         localStorage.setItem('token',response.data.UserToken);
         this.api.successAlert(response.message);
         this.router.navigate(['home/author/view']);
-        this.isLogin=false;
       }
       else{
         this.api.errorAlert(response.message);

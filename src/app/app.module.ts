@@ -17,12 +17,14 @@ import { NgToggleModule } from 'ng-toggle-button';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
+    SignupComponent,
     HomeComponent,
     NopagefoundComponent
   ],
