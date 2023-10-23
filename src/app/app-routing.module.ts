@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './auth/login/login.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   loadChildren: () => import('./auth/auth.module').then((mob) => mob.AuthModule),
-  // },
+  {
+    path: '',redirectTo:'login',pathMatch:'full'
+  },
+  {
+    path:'login',component:LoginComponent
+  },
+  {
+    path:'home',component:NavbarComponent
+  },
   {
     path:'author',loadChildren:()=>import('./author/author.module').then((mob)=>mob.AuthorModule)
   },
