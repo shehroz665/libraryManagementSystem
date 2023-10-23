@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import Swal from 'sweetalert2'
 import { retry } from 'rxjs';
+import jwtDecode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +26,11 @@ export class ApiMethodsService {
   }
   isLogin(){
     return localStorage.getItem("token") || '';
+  }
+  decodeToken(){
+    const token:any= localStorage.getItem("token");
+    const decodedToken:any=jwtDecode(token);
+    return Number(decodedToken['RoleId']);
   }
   successAlert(message: string) {
     return Swal.fire({

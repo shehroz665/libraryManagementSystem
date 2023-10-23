@@ -3,6 +3,7 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
 import { Router } from '@angular/router';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
+import jwtDecode from 'jwt-decode';
 @Component({
   selector: 'app-viewcategory',
   templateUrl: './viewcategory.component.html',
@@ -52,12 +53,14 @@ export class ViewcategoryComponent {
     },
   ];
   url:string=`https://localhost:7084/api/category`;
+  token:any=localStorage.getItem("token");
   categories:any[]=[];
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
   sizeIcon:SizeProp='1x';
   constructor(private router:Router,private apiData:ApiMethodsService){
       this.getCategory();
+      console.log(this.apiData.decodeToken());
   }
   getCategory(){
     this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
