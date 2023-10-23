@@ -60,6 +60,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: NavbarComponent,
+    canActivate:[AuthGuard],
     children: [ 
       {
         path: 'author',
@@ -83,7 +84,7 @@ const routes: Routes = [
       },
       
     ]
-    ,canActivate:[AuthGuard]
+
   },
   {
     path:"**",
