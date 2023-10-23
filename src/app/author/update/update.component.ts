@@ -47,7 +47,7 @@ export class UpdateComponent {
         if (response.statuscode === 200) {
           this.api.successAlert(response.message);
           this.authorFormData.reset();
-          this.router.navigate(['/author/view']);
+          this.router.navigate(['home/author/view']);
         }
         else {
           this.api.errorAlert(response.message);

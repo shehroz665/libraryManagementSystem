@@ -29,7 +29,7 @@ export class AddComponent {
         if (response.statuscode === 201) {
           this.api.successAlert(response.message);
           this.authorFormData.reset();
-          this.router.navigate(['/author/view']);
+          this.router.navigate(['home/author/view']);
         }
         else {
           this.api.errorAlert(response.message);

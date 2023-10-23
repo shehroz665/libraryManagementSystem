@@ -27,7 +27,7 @@ export class AddcategoryComponent {
         if(response.statuscode===201){
           this.api.successAlert(response.message);
           this.categoryFormData.reset();
-          this.router.navigate(['category/view']);
+          this.router.navigate(['home/category/view']);
         }
         else{
           this.api.errorAlert(response.message);    

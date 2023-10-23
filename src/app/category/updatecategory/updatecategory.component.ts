@@ -43,7 +43,7 @@ export class UpdatecategoryComponent {
         if(response.statuscode===200){
           this.api.successAlert(response.message);
           this.categoryFormData.reset();
-          this.router.navigate(['category/view']);
+          this.router.navigate(['home/category/view']);
         }
         else{
           this.api.errorAlert(response.message);    

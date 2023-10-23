@@ -52,7 +52,7 @@ export class AddbookComponent {
       if(response.statuscode===201){
         this.api.successAlert(response.message);
         this.bookFormData.reset();
-        this.router.navigate(['/book/view']);
+        this.router.navigate(['home/book/view']);
       }
       else{
         this.api.errorAlert(response.message);

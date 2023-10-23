@@ -38,10 +38,10 @@ export class ViewComponent {
     
   }
   goToUpdateView(id:number){
-    this.router.navigate(['author/update',id]);
+    this.router.navigate(['home/author/update',id]);
   }
   navigateToSpecificRoute(){
-    this.router.navigate(["author/add"]);
+    this.router.navigate(["home/author/add"]);
   }
   deleteAuthor(data:any){
     var deleteUrl=this.url+`delete/${data.AuthId}`;

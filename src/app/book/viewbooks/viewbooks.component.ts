@@ -38,10 +38,10 @@ export class ViewbooksComponent {
     
   }
   goToUpdateView(id:number){
-    this.router.navigate(['book/update',id]);
+    this.router.navigate(['home/book/update',id]);
   }
   navigateToSpecificRoute(){
-    this.router.navigate(["book/add"]);
+    this.router.navigate(["home/book/add"]);
   }
   deleteBook(data:any){
     var deleteUrl=this.url+`delete/${data.BookId}`;

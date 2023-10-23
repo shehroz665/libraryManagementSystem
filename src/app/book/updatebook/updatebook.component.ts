@@ -66,7 +66,7 @@ export class UpdatebookComponent {
     this.api.updateDataUsingApi(`https://localhost:7084/api/books/update/${this.id}`,data).subscribe((response:any)=> {
       if(response.statuscode===200){
         this.api.successAlert(response.message);
-        this.router.navigate(['/book/view']);
+        this.router.navigate(['home/book/view']);
       }
       else{
         this.api.errorAlert(response.message);

@@ -80,10 +80,10 @@ export class ViewcategoryComponent {
     
   }
   goToUpdate(id:number){
-    this.router.navigate(['category/update',id]);
+    this.router.navigate(['home/category/update',id]);
   }
   navigateToSpecificRoute(){
-      this.router.navigate(['category/add']);
+      this.router.navigate(['home/category/add']);
   }
   deleteCategory(obj:any){
     var deleteUrl=`https://localhost:7084/api/category/delete/${obj.CatId}`;
