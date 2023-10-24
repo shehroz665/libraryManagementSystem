@@ -39,7 +39,7 @@ const routes: Routes = [
         loadChildren: () => import('./category/category.module').then((mob) => mob.CategoryModule)
       },
       {
-        path: 'student',
+        path: 'profile',
         loadChildren: () => import('./student/student.module').then((mob) => mob.StudentModule)
       },
       {
