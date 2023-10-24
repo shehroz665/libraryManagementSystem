@@ -17,15 +17,12 @@
                         <th scope="col" class="text-center">ISBN</th>
                         <th scope="col" class="text-center">Category</th>
                         <th scope="col" class="text-center">Author</th>
-                            <th scope="col" class="text-center" *ngIf="roleId===1">Price</th>
-                            <th scope="col" class="text-center" *ngIf="roleId===1">Actual Q.</th>
-                            <th scope="col" class="text-center" *ngIf="roleId===1">Avaiable Q.</th>
-                            <th scope="col" class="text-center" *ngIf="roleId===1">Status</th>
-                            <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
-
-                            <th scope="col" class="text-center" *ngIf="roleId!=1">Status</th>
-
-
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Price</th>
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Actual Q.</th>
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Avaiable Q.</th>
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Status</th>
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
+                        <th scope="col" class="text-center" *ngIf="roleId!=1">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,32 +32,33 @@
                         <td class="text-center">{{book.Isbn | isbnFormatter}}</td>
                         <td class="text-center">{{ book.CatName }}</td>
                         <td class="text-center">{{ book.AuthName }}</td>
-                            <td class="text-center" *ngIf="roleId===1">{{ book.Price }}</td>
-                            <td class="text-center" *ngIf="roleId===1">{{ book.ActualQuantity }}</td>
-                            <td class="text-center" *ngIf="roleId===1">{{ book.AvailableQuantity }}</td>
-                            <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': book.Status===1? 'green' : 'red'}">
-                                {{book.Status===1? 'Active' :'Deactivated' }}</td>
+                        <td class="text-center" *ngIf="roleId===1">{{ book.Price }}</td>
+                        <td class="text-center" *ngIf="roleId===1">{{ book.ActualQuantity }}</td>
+                        <td class="text-center" *ngIf="roleId===1">{{ book.AvailableQuantity }}</td>
+                        <td *ngIf="roleId===1" class="text-center"
+                            [ngStyle]="{'color': book.Status===1? 'green' : 'red'}">
+                            {{book.Status===1? 'Active' :'Deactivated' }}</td>
                         <td class="text-center" *ngIf="roleId===1">
                             <div class="d-flex flex-row justify-content-center">
                                 <div>
                                     <fa-icon [icon]="updateIcon" [size]="sizeIcon" [style.color]="'black'" class="m-1"
-                                        style="font-size:20px"
-                                        (click)="goToUpdateView(book.BookId)"></fa-icon>
-                                    <fa-icon class="m-1" [icon]="trashIcon" [style.color]="'rgb(195, 41, 41)'" style="font-size:20px"
-                                        (click)="deleteBook(book)"></fa-icon>
+                                        style="font-size:20px" (click)="goToUpdateView(book.BookId)"></fa-icon>
+                                    <fa-icon class="m-1" [icon]="trashIcon" [style.color]="'rgb(195, 41, 41)'"
+                                        style="font-size:20px" (click)="deleteBook(book)"></fa-icon>
                                 </div>
-                                <div >
+                                <div>
                                     <ng-toggle [value]="book.toggleValue" [color]="{
                                         unchecked: 'rgb(184, 16, 16)',
                                         checked: '#067e00',                       
-                                    }" (change)="toggleChanged(book.BookId)" ></ng-toggle>
+                                    }" (change)="toggleChanged(book.BookId)"></ng-toggle>
                                 </div>
 
                             </div>
                         </td>
-                            <td *ngIf="roleId!==1" class="text-center" [ngStyle]="{'color': book.AvailableQuantity>0? 'green' : 'red'}">
-                                {{book.AvailableQuantity>0? 'Available' :'Not Available' }}
-                            </td>
+                        <td *ngIf="roleId!==1" class="text-center"
+                            [ngStyle]="{'color': book.AvailableQuantity>0? 'green' : 'red'}">
+                            {{book.AvailableQuantity>0? 'Available' :'Not Available' }}
+                        </td>
                     </tr>
                 </tbody>
             </table>

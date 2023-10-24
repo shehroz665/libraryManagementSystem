@@ -26,8 +26,8 @@
                     <th scope="row">{{ category.CatId}}</th>
                     <td class="text-center">{{  category.CatName }}</td>
                     <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': category.Status===1? 'green' :'red'}">{{ category.Status===1? 'Active' :'Deactivated' }}</td>
-                    <td class="text-center">
-                        <div class="d-flex flex-row justify-content-center" *ngIf="roleId===1">
+                    <td class="text-center" *ngIf="roleId===1">
+                        <div class="d-flex flex-row justify-content-center" >
                             <div>
                                 <fa-icon [icon]="updateIcon" [size]="sizeIcon" [style.color]="'black'" class="m-1" style="font-size:20px"
                                 (click)="goToUpdate(category.CatId)"></fa-icon>
