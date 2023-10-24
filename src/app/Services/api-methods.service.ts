@@ -32,6 +32,11 @@ export class ApiMethodsService {
     const decodedToken:any=jwtDecode(token);
     return Number(decodedToken['RoleId']);
   }
+  getUserId(){
+    const token:any= localStorage.getItem("token");
+    const decodedToken:any=jwtDecode(token);
+    return Number(decodedToken['UserId']);
+  }
   successAlert(message: string) {
     return Swal.fire({
       position: 'top-end',
