@@ -70,7 +70,9 @@ export class ApiMethodsService {
     ];
     const studentOrTeacher:any[]=[
       { id:1,path:'book/view',pathName:'Books'},
-      { id:2,path:'profile/edit',pathName:'Profile'},
+      {id:2,path:'book/apply',pathName:'Apply'},
+      { id:3,path:'profile/edit',pathName:'Profile'},
+  
     ];
     if(roleId===1){
       return author;
