@@ -10,12 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgToggleModule } from 'ng-toggle-button';
 import { IsbnFormatterPipe } from '../Pipes/isbn-formatter.pipe';
+import { ApplyComponent } from './apply/apply.component';
+import { NewComponent } from './new/new.component';
 @NgModule({
   declarations: [
     ViewbooksComponent,
     AddbookComponent,
     UpdatebookComponent,
-    IsbnFormatterPipe
+    IsbnFormatterPipe,
+    ApplyComponent,
+    NewComponent
   ],
   imports: [
     CommonModule,

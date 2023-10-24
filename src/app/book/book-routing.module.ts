@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ViewbooksComponent } from './viewbooks/viewbooks.component';
 import { AddbookComponent } from './addbook/addbook.component';
 import { UpdatebookComponent } from './updatebook/updatebook.component';
+import { ApplyComponent } from './apply/apply.component';
+import { NewComponent } from './new/new.component';
 
 const routes: Routes = [
   {
@@ -10,6 +12,12 @@ const routes: Routes = [
   },
   {
     path:'add',component:AddbookComponent
+  },
+  {
+    path:'apply',component:ApplyComponent
+  },
+  {
+    path:'apply/new',component:NewComponent
   },
   {
     path:'update/:id',component:UpdatebookComponent
