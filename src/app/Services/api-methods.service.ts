@@ -21,6 +21,15 @@ export class ApiMethodsService {
     var headers=new HttpHeaders().set("Authorization",`bearer ${localStorage.getItem('token')}`);
     return this.http.put(url,data,{headers});
   }
+  postOrUpdate(url:string,data:any,id:number){
+    var headers=new HttpHeaders().set("Authorization",`bearer ${localStorage.getItem('token')}`);
+    if(id===1){ //post
+      return this.http.post(url, data,{headers});
+    }
+    else{       //update
+      return this.http.put(url,data,{headers});
+    }
+  }
   login(url:string,data:any){
     return this.http.post(url, data);
   }
@@ -32,10 +41,10 @@ export class ApiMethodsService {
     const decodedToken:any=jwtDecode(token);
     return Number(decodedToken['RoleId']);
   }
-  getUserId(){
+  getTokenFields(title:string){
     const token:any= localStorage.getItem("token");
     const decodedToken:any=jwtDecode(token);
-    return Number(decodedToken['UserId']);
+    return decodedToken[title];
   }
   successAlert(message: string) {
     return Swal.fire({
