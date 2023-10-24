@@ -1,1 +1,80 @@
-<p>updatestudent works!</p>
+<div class="container">
+    <div class="d-flex flex-column justify-content-center m-3 p-2 shadow-lg rounded">
+        <div class="d-flex justify-content-between">
+            <div class="p-2 text-black">
+                <h4 class="heading">{{status}} Profile</h4>
+            </div>
+        </div>
+        <div>
+            <form [formGroup]="profileData" (ngSubmit)="submitData()">
+                <div class="form-group m-2">
+                    <label for="Name" class="mb-2">Name</label>
+                    <input
+                        #Name
+                        id="Name"
+                        name="Name"
+                        formControlName="Name"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('Name') && getControl('Name')?.invalid && getControl('Name')?.touched">This field is required</span>
+                </div>
+                <div class="form-group m-2">
+                    <label for="RollNumber" class="mb-2">Roll Number</label>
+                    <input
+                        #RollNumber
+                        id="RollNumber"
+                        name="RollNumber"
+                        formControlName="RollNumber"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('RollNumber') && getControl('RollNumber')?.invalid && getControl('RollNumber')?.touched">This field is required</span>
+                </div>
+                <div class="form-group m-2">
+                    <label for="Semester" class="mb-2">Semester</label>
+                    <input
+                        #Semester
+                        id="Semester"
+                        name="Semester"
+                        formControlName="Semester"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('Semester') && getControl('Semester')?.invalid && getControl('Semester')?.touched">This field is required</span>
+                </div>
+                <!-- <div class="form-group m-2">
+                    <label for="Email" class="mb-2">Email</label>
+                    <input
+                        #Email
+                        id="Email"
+                        name="Email"
+                        formControlName="Email"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('Email') && getControl('Email')?.invalid && getControl('Email')?.touched">This field is required</span>
+                </div> -->
+                <div class="form-group m-2">
+                    <label for="Phone" class="mb-2">Phone</label>
+                    <input
+                        #Phone
+                        id="Phone"
+                        name="Phone"
+                        formControlName="Phone"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('Phone') && getControl('Phone')?.invalid && getControl('Phone')?.touched">This field is required</span>
+                </div>
+                <div class="form-group m-2">
+                    <label for="Address" class="mb-2">Address</label>
+                    <input
+                        #Phone
+                        id="Address"
+                        name="Address"
+                        formControlName="Address"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('Address') && getControl('Address')?.invalid && getControl('Address')?.touched">This field is required</span>
+                </div>
+                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;">{{status}}</button>
+            </form>
+        </div>
+    </div>
+</div>
