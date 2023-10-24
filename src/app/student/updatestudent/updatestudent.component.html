@@ -15,6 +15,7 @@
                         name="Name"
                         formControlName="Name"
                         class="form-control"
+                        autocomplete="off"
                     />
                     <span style="color: red;" *ngIf="getControl('Name') && getControl('Name')?.invalid && getControl('Name')?.touched">This field is required</span>
                 </div>
@@ -26,6 +27,7 @@
                         name="RollNumber"
                         formControlName="RollNumber"
                         class="form-control"
+                        autocomplete="off"
                     />
                     <span style="color: red;" *ngIf="getControl('RollNumber') && getControl('RollNumber')?.invalid && getControl('RollNumber')?.touched">This field is required</span>
                 </div>
@@ -37,6 +39,7 @@
                         name="Semester"
                         formControlName="Semester"
                         class="form-control"
+                        autocomplete="off"
                     />
                     <span style="color: red;" *ngIf="getControl('Semester') && getControl('Semester')?.invalid && getControl('Semester')?.touched">This field is required</span>
                 </div>
@@ -48,6 +51,7 @@
                         name="Phone"
                         formControlName="Phone"
                         class="form-control"
+                        autocomplete="off"
                     />
                     <span style="color: red;" *ngIf="getControl('Phone') && getControl('Phone')?.invalid && getControl('Phone')?.touched">This field is required and should have 11 digits</span>
                 </div>
@@ -59,6 +63,7 @@
                         name="Address"
                         formControlName="Address"
                         class="form-control"
+                        autocomplete="off"
                     />
                     <span style="color: red;" *ngIf="getControl('Address') && getControl('Address')?.invalid && getControl('Address')?.touched">This field is required</span>
                 </div>
