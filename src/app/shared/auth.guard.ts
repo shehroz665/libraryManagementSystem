@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       if (userRoleId===1) {
         return true;
       }
-      else if(userRoleId!=1 && (state.url.includes("add") || state.url.includes("update"))){
+      else if(userRoleId!=1 && (state.url.includes("add") || state.url.includes("update") || state.url.includes("author/view") || state.url.includes("category/view") )){
         this.router.navigate(['**']);
         return false;
       } 
