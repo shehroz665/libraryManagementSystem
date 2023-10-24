@@ -14,10 +14,9 @@
                 <tr >
                     <th scope="col">#</th>
                     <th scope="col" class="text-center">Genre</th>
-                    <div *ngIf="roleId===1">
-                        <th scope="col" class="text-center">Status</th>
-                        <th scope="col" class="text-center">Actions</th>
-                    </div>
+
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Status</th>
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
 
                 </tr>
             </thead>

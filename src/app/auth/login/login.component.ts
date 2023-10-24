@@ -10,7 +10,6 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
 })
 export class LoginComponent {
   
-  isLogin:boolean=true;
   loginForm=new FormGroup({
     email:new FormControl('',[Validators.required,Validators.email]),
     password:new FormControl('',[Validators.required])
@@ -34,8 +33,12 @@ export class LoginComponent {
       if(response.statuscode===200){
         localStorage.setItem('token',response.data.UserToken);
         this.api.successAlert(response.message);
-        this.router.navigate(['home/author/view']);
-        this.isLogin=false;
+        if(response.data.RoleId===1){
+          this.router.navigate(['home/author/view']);
+        }
+        else{
+          this.router.navigate(['home/book/view']);
+        }
       }
       else{
         this.api.errorAlert(response.message);

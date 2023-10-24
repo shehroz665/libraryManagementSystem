@@ -3,29 +3,12 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav" style="margin-left: auto;">
+  <div class="collapse navbar-collapse d-flex flex-row justify-content-end" id="navbarNav">
+    <ul class="navbar-nav" *ngFor="let option of options; let i = index">
       <li class="nav-item">
-        <a class="nav-link text-white" routerLink="/statistics">Home</a>
+        <a class="nav-link text-white" [routerLink]="option.path">{{option.pathName}}</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" routerLink="author/view">Authors</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" routerLink="category/view"> Categories</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" routerLink="book/view">
-          Books
-        </a>
-
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" routerLink="transaction/view">
-          Transactions
-        </a>
-      </li>
-      <li class="nav-item ">
+      <li class="nav-item" *ngIf="options.length-1===i">
         <button class="nav-link bg-danger rounded" (click)="logoutFromApp()" >
           Logout
         </button>

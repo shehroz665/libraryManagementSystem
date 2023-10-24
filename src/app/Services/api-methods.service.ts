@@ -47,4 +47,19 @@ export class ApiMethodsService {
       text: message
     });
   }
+  authorizeNavbars(roleId:number){
+    const author:any[]=[
+      { id:1,path:'category/view',pathName:'Categories'},
+      { id:2,path:'author/view',pathName:'Authors'},
+      { id:3,path:'book/view',pathName:'Books'},
+      { id:4,path:'transaction/view',pathName:'Transactions'},
+    ];
+    const studentOrTeacher:any[]=[
+      { id:1,path:'book/view',pathName:'Books'},
+    ];
+    if(roleId===1){
+      return author;
+    }
+    return studentOrTeacher;
+  }
 }

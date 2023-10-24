@@ -8,7 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(private router:Router,private api:ApiMethodsService){}
+  options:any[]=[];
+  roleId:number=0;
+  constructor(private router:Router,private api:ApiMethodsService){
+    this.roleId=this.api.decodeToken();
+    if(this.roleId!=0){
+      this.options=this.api.authorizeNavbars(this.roleId);
+      // console.log('options',this.options);
+    }
+  }
   logoutFromApp(){
     localStorage.removeItem('token');
     this.api.successAlert("You logout...!");
