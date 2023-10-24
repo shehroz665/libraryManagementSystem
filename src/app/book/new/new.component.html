@@ -8,17 +8,52 @@
         <div>
             <form [formGroup]="applyBookForm" (ngSubmit)="postData()">
                 <div class="form-group m-2">
-                    <label for="AuthName" class="mb-2">Author Name</label>
+                    <label for="book" class="mb-2">Book</label>
                     <input
-                        #AuthName
-                        id="AuthName"
-                        name="AuthName"
-                        formControlName="AuthName"
+                        #book
+                        id="book"
+                        name="book"
+                        formControlName="book"
                         class="form-control"
                     />
-                    <span style="color: red;" *ngIf="authName && authName.invalid && authName.touched">This field is required</span>
+                    <span style="color: red;" *ngIf="getControl('book') && getControl('book')?.invalid && getControl('book')?.touched">This field is required</span>
                 </div>
-                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;">Apply</button>
+                <div class="form-group m-2">
+                    <label for="borrowDate" class="mb-2">Borrowed Date</label>
+                    <input
+                        type="date"
+                        #borrowDate
+                        id="borrowDate"
+                        name="borrowDate"
+                        formControlName="borrowDate"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('borrowDate') && getControl('borrowDate')?.invalid && getControl('borrowDate')?.touched">This field is required</span>
+                </div>
+                <div class="form-group m-2">
+                    <label for="dueDate" class="mb-2">Due Date</label>
+                    <input
+                        type="date"
+                        #dueDate
+                        id="dueDate"
+                        name="dueDate"
+                        formControlName="dueDate"
+                        class="form-control"
+                    />
+                    <span style="color: red;" *ngIf="getControl('dueDate') && getControl('dueDate')?.invalid && getControl('dueDate')?.touched">This field is required</span>
+                </div>
+                <div class="form-group m-2">
+                    <label for="returnDate" class="mb-2">Return Date</label>
+                    <input
+                        type="date"
+                        #returnDate
+                        id="returnDate"
+                        name="returnDate"
+                        formControlName="returnDate"
+                        class="form-control"
+                    />
+                </div>
+                <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;" [disabled]="applyBookForm.invalid">Apply</button>
             </form>
         </div>
     </div>

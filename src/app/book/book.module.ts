@@ -12,6 +12,7 @@ import { NgToggleModule } from 'ng-toggle-button';
 import { IsbnFormatterPipe } from '../Pipes/isbn-formatter.pipe';
 import { ApplyComponent } from './apply/apply.component';
 import { NewComponent } from './new/new.component';
+import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     ViewbooksComponent,
@@ -27,7 +28,8 @@ import { NewComponent } from './new/new.component';
     FontAwesomeModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgToggleModule
+    NgToggleModule,
+    NgbDatepicker
   ]
 })
 export class BookModule { }
