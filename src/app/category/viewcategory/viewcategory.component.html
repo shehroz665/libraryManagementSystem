@@ -4,7 +4,7 @@
             <div class="p-2 text-black ">
                 <h4 class="heading">View Book Categories</h4>
             </div>
-            <div class="mx-2 my-2">
+            <div class="mx-2 my-2" *ngIf="roleId===1">
                 <button class="btn btn-primary" (click)="navigateToSpecificRoute()">Add Category</button> 
             </div>
         </div>
@@ -14,17 +14,20 @@
                 <tr >
                     <th scope="col">#</th>
                     <th scope="col" class="text-center">Genre</th>
-                    <th scope="col" class="text-center">Status</th>
-                    <th scope="col" class="text-center">Actions</th>
+                    <div *ngIf="roleId===1">
+                        <th scope="col" class="text-center">Status</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </div>
+
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let category of categories;">
                     <th scope="row">{{ category.CatId}}</th>
                     <td class="text-center">{{  category.CatName }}</td>
-                    <td class="text-center" [ngStyle]="{'color': category.Status===1? 'green' :'red'}">{{ category.Status===1? 'Active' :'Deactivated' }}</td>
+                    <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': category.Status===1? 'green' :'red'}">{{ category.Status===1? 'Active' :'Deactivated' }}</td>
                     <td class="text-center">
-                        <div class="d-flex flex-row justify-content-center">
+                        <div class="d-flex flex-row justify-content-center" *ngIf="roleId===1">
                             <div>
                                 <fa-icon [icon]="updateIcon" [size]="sizeIcon" [style.color]="'black'" class="m-1" style="font-size:20px"
                                 (click)="goToUpdate(category.CatId)"></fa-icon>

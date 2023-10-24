@@ -10,12 +10,14 @@ import { SizeProp } from '@fortawesome/fontawesome-svg-core';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
+  roleId:number=0;
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
   url:string=`https://localhost:7084/api/author/`;
   authors:any[]=[];
   constructor (private router:Router,private authorData:ApiMethodsService){
     this.getAuthors();
+    this.roleId=this.authorData.decodeToken();
   }
   getAuthors(){
     this.authorData.getDataFromApi(this.url).subscribe((response:any)=>{

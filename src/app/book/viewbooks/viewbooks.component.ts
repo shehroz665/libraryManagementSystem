@@ -9,6 +9,7 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
   styleUrls: ['./viewbooks.component.css']
 })
 export class ViewbooksComponent {
+  roleId:number=0;
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
   sizeIcon:SizeProp='1x';
@@ -16,6 +17,7 @@ export class ViewbooksComponent {
   books:any[]=[];
   constructor (private router:Router,private api:ApiMethodsService){
     this.getBooks();
+    this.roleId=this.api.decodeToken();
   }
   getBooks(){
     this.api.getDataFromApi(this.url).subscribe((response:any)=>{

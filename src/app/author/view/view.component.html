@@ -4,7 +4,7 @@
             <div class="p-2 text-black ">
                 <h4 class="heading">View Authors</h4>
             </div>
-            <div class="mx-2 my-2">
+            <div class="mx-2 my-2" *ngIf="roleId===1">
                 <button class="btn btn-primary" (click)="navigateToSpecificRoute()">Add Author</button>
             </div>
         </div>
@@ -14,17 +14,17 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col" class="text-center">Name</th>
-                        <th scope="col" class="text-center">Status</th>
-                        <th scope="col" class="text-center">Actions</th>
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Status</th>
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let author of authors;index as i">
                         <th scope="row">{{ author.AuthId }}</th>
                         <td class="text-center">{{ author.AuthName }}</td>
-                        <td class="text-center" [ngStyle]="{'color': author.Status===1? '#067e00' : 'rgb(184, 16, 16)'}">{{
+                        <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': author.Status===1? '#067e00' : 'rgb(184, 16, 16)'}">{{
                             author.Status===1? 'Active' :'Deactivated' }}</td>
-                        <td class="text-center">
+                        <td class="text-center" *ngIf="roleId===1">
                             <div class="d-flex flex-row justify-content-center">
                                 <div>
                                     <fa-icon [icon]="updateIcon" style="font-size:20px" [style.color]="'black'" class="m-1"

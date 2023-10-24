@@ -10,48 +10,7 @@ import jwtDecode from 'jwt-decode';
   styleUrls: ['./viewcategory.component.css']
 })
 export class ViewcategoryComponent {
-  data:any[]= [
-    {
-      name: 'Russia',
-      area: 17075200,
-      population: 146989754,
-    },
-    {
-      name: 'Canada',
-      area: 9976140,
-      population: 36624199,
-    },
-    {
-      name: 'United States',
-      area: 9629091,
-      population: 324459463,
-    },
-    {
-      name: 'China',
-      area: 9596960,
-      population: 1409517397,
-    },
-    {
-      name: 'Russia',
-      area: 17075200,
-      population: 146989754,
-    },
-    {
-      name: 'Canada',
-      area: 9976140,
-      population: 36624199,
-    },
-    {
-      name: 'United States',
-      area: 9629091,
-      population: 324459463,
-    },
-    {
-      name: 'China',
-      area: 9596960,
-      population: 1409517397,
-    },
-  ];
+  roleId:number=0;
   url:string=`https://localhost:7084/api/category`;
   token:any=localStorage.getItem("token");
   categories:any[]=[];
@@ -60,7 +19,7 @@ export class ViewcategoryComponent {
   sizeIcon:SizeProp='1x';
   constructor(private router:Router,private apiData:ApiMethodsService){
       this.getCategory();
-      console.log(this.apiData.decodeToken());
+      this.roleId=this.apiData.decodeToken();
   }
   getCategory(){
     this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
