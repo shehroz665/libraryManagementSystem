@@ -7,8 +7,7 @@ import { ApiMethodsService } from '../Services/api-methods.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router,private api:ApiMethodsService) {
-   
+  constructor(private router: Router, private api: ApiMethodsService) {
   }
 
   canActivate(
@@ -16,10 +15,20 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     if (this.api.isLogin()) {
-      return true;
+      const userRoleId: number = this.api.decodeToken();
+      if (userRoleId===1) {
+        return true;
+      }
+      else if(userRoleId!=1 && (state.url.includes("add") || state.url.includes("update"))){
+        this.router.navigate(['**']);
+        return false;
+      } 
+      else {
+        return true;
+      }
     } else {
-      this.router.navigate(['']);
-      return false; 
+      this.router.navigate(['**']);
+      return false;
     }
   }
 }
