@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
   ): boolean {
     if (this.api.isLogin()) {
       const userRoleId: number = this.api.decodeToken();
-      if (userRoleId === 1 && state.url.includes("profile/edit")) {
+      if (userRoleId === 1 && (state.url.includes("profile/edit") || state.url.includes("new"))) {
         this.router.navigate(['**']);
         return false;
       }
