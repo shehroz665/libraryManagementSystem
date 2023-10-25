@@ -4,7 +4,7 @@
             <div class="p-2 text-black ">
                 <h4 class="heading">View Applied Books</h4>
             </div>
-            <div class="mx-2 my-2">
+            <div class="mx-2 my-2" *ngIf="roleId!=1">
                 <button class="btn btn-primary" (click)="navigateToSpecificRoute()">Apply</button>
             </div>
         </div>
@@ -14,28 +14,22 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col" class="text-center">Title</th>
-                        <th scope="col" class="text-center">ISBN</th>
-                        <th scope="col" class="text-center">Category</th>
-                        <th scope="col" class="text-center">Author</th>
-                        <th scope="col" class="text-center">Price</th>
-                        <th scope="col" class="text-center">Actual Q.</th>
-                        <th scope="col" class="text-center">Avaiable Q.</th>
+                        <th scope="col" class="text-center">Borrow Date</th>
+                        <th scope="col" class="text-center">Due Date</th>
+                        <th scope="col" class="text-center">Return Date</th>
+                        <th scope="col" class="text-center">Applicant</th>
                         <th scope="col" class="text-center">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let book of books;index as i">
-                        <th scope="row">{{ book.BookId }}</th>
+                        <th scope="row">{{ book.TransID}}</th>
                         <td class="text-center">{{ book.Title }}</td>
-                        <td class="text-center">{{book.Isbn | isbnFormatter}}</td>
-                        <td class="text-center">{{ book.CatName }}</td>
-                        <td class="text-center">{{ book.AuthName }}</td>
-                        <td class="text-center">{{ book.Price }}</td>
-                        <td class="text-center">{{ book.ActualQuantity }}</td>
-                        <td class="text-center">{{ book.AvailableQuantity }}</td>
-                        <td class="text-center"
-                            [ngStyle]="{'color': book.Status===1? 'green' : 'red'}">
-                            {{book.Status===1? 'Active' :'Deactivated' }}</td>
+                        <td class="text-center">{{book.BorrowedDate | date}}</td>
+                        <td class="text-center">{{ book.DueDate | date }}</td>
+                        <td class="text-center">{{ book.ReturnedDate ? (book.ReturnedDate | date): '-' }}</td>
+                        <td class="text-center">{{ book.Email }}</td>
+                        <td class="text-center" [style.color]="book.bookStatusColor">{{book.bookStatus}}</td>
                     </tr>
                 </tbody>
             </table>

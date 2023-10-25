@@ -8,20 +8,23 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
   styleUrls: ['./apply.component.css']
 })
 export class ApplyComponent {
-  roleId:number=0;
-  url:string=`https://localhost:7084/api/books/`;
+  roleId:number=Number(this.api.getTokenFields('RoleId'));
+  userId:number=Number(this.api.getTokenFields('UserId'));
+  url:string=this.roleId===1 ? `https://localhost:7084/api/transaction/` : `https://localhost:7084/api/transaction/${this.userId}`;
   books:any[]=[];
   constructor (private router:Router,private api:ApiMethodsService){
     this.getBorrowedBooks();
-    this.roleId=this.api.decodeToken();
   }
   getBorrowedBooks(){
     this.api.getDataFromApi(this.url).subscribe((response:any)=>{
       this.books=response.data.map((book:any)=> ({
         ...book,
-        toggleValue:book.Status===1 ? true : false
-      }));      
+        bookStatus: book.Status===1? 'Pending' : (book.Status===2 ? 'Approved' : (book.Status===3 ? 'Returned' : (book.Status===4 ? 'Rejected' : '-') ) ),
+        bookStatusColor: book.Status===1? '#F4CE14' : (book.Status===2 ? 'green' : (book.Status===3 ? 'teal' : (book.Status===4 ? 'red' : 'black') ) ),
+      }))  
     });
+    console.log(this.url);
+    
   }
   navigateToSpecificRoute(){
     this.router.navigate(["home/book/apply/new"]);
