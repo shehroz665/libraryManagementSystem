@@ -66,7 +66,7 @@ export class ApiMethodsService {
       { id:1,path:'category/view',pathName:'Categories'},
       { id:2,path:'author/view',pathName:'Authors'},
       { id:3,path:'book/view',pathName:'Books'},
-      { id:4,path:'transaction/view',pathName:'Transactions'},
+      { id:4,path:'book/apply',pathName:'Requests'},
     ];
     const studentOrTeacher:any[]=[
       { id:1,path:'book/view',pathName:'Books'},
