@@ -4,9 +4,11 @@
             <div class="p-2 text-black ">
                 <h4 class="heading">View Applied Books</h4>
             </div>
-            <div class="mx-2 my-2" *ngIf="roleId!=1">
-                <button class="btn btn-primary" (click)="navigateToSpecificRoute()">Apply</button>
+            <div class="mx-2 my-2 d-flex flex-row">
+                    <input type="search" class="form-control mx-2" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" placeholder="Search" />
+                    <button *ngIf="roleId!=1" class="btn btn-primary" (click)="navigateToSpecificRoute()">Apply</button>
             </div>
+            
         </div>
         <div class="container">
             <table class="table table-striped table-hover">
@@ -18,7 +20,16 @@
                         <th scope="col" class="text-center">Due Date</th>
                         <th scope="col" class="text-center">Last Return Date</th>
                         <th scope="col" class="text-center">Applicant</th>
-                        <th scope="col" class="text-center">Status</th>
+                        <th scope="col" class="text-center">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <label for="selectedStatus" class="px-1">Status</label>
+                                </div>
+                                <select id="selectedStatus" name="selectedStatus" #selectedStatus formControlName="selectedStatus" class="rounded">
+                                    <option *ngFor="let item of statusArray">{{item.status}}</option>
+                                </select>
+                            </div>
+                        </th>
                         <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
                     </tr>
                 </thead>
@@ -34,14 +45,17 @@
                         <td class="text-center" *ngIf="roleId===1">
                             <div class="d-flex flex-row justify-content-center">
                                 <div>
-                                    <fa-icon *ngIf="book.bookStatus==='Pending'" matTooltip="Approve" [icon]="approvedIcon" [size]="sizeIcon" [style.color]="'green'" class="m-1"
-                                        style="font-size:20px" (click)="update(book.TransID,book,2)" ></fa-icon>
-                                    <fa-icon *ngIf="book.bookStatus==='Approved'" matTooltip="Return" [icon]="returnedIcon" [size]="sizeIcon" [style.color]="'teal'" class="m-1"
-                                        style="font-size:20px" (click)="update(book.TransID,book,3)"></fa-icon>                                     
-                                    <fa-icon  *ngIf="book.bookStatus==='Pending'" matTooltip="Reject" class="m-1" [icon]="rejectedIcon" [style.color]="'rgb(195, 41, 41)'"
-                                        style="font-size:20px" (click)="update(book.TransID,book,4)"></fa-icon>
-                                    <fa-icon  *ngIf="book.bookStatus==='Returned'" matTooltip="Returned" class="m-1" [icon]="checkedIcon" [style.color]="'green'"
-                                    style="font-size:20px"></fa-icon>
+                                    <fa-icon *ngIf="book.bookStatus==='Pending'" matTooltip="Approve"
+                                        [icon]="approvedIcon" [size]="sizeIcon" [style.color]="'green'" class="m-1"
+                                        style="font-size:20px" (click)="update(book.TransID,book,2)"></fa-icon>
+                                    <fa-icon *ngIf="book.bookStatus==='Approved'" matTooltip="Return"
+                                        [icon]="returnedIcon" [size]="sizeIcon" [style.color]="'teal'" class="m-1"
+                                        style="font-size:20px" (click)="update(book.TransID,book,3)"></fa-icon>
+                                    <fa-icon *ngIf="book.bookStatus==='Pending'" matTooltip="Reject" class="m-1"
+                                        [icon]="rejectedIcon" [style.color]="'rgb(195, 41, 41)'" style="font-size:20px"
+                                        (click)="update(book.TransID,book,4)"></fa-icon>
+                                    <fa-icon *ngIf="book.bookStatus==='Returned'" matTooltip="Returned" class="m-1"
+                                        [icon]="checkedIcon" [style.color]="'green'" style="font-size:20px"></fa-icon>
                                 </div>
                             </div>
                         </td>

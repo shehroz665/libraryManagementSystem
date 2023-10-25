@@ -3,24 +3,44 @@ import { Router } from '@angular/router';
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
 import { faCheck,faXmark,faRotateLeft,faCircleCheck} from '@fortawesome/free-solid-svg-icons';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
+import { NgModel } from '@angular/forms';
 @Component({
   selector: 'app-apply',
   templateUrl: './apply.component.html',
   styleUrls: ['./apply.component.css']
 })
 export class ApplyComponent {
+  constructor (private router:Router,private api:ApiMethodsService){
+    this.getBorrowedBooks();
+  }
   approvedIcon=faCheck;
   rejectedIcon=faXmark;
   returnedIcon=faRotateLeft;
   checkedIcon=faCircleCheck;
   sizeIcon:SizeProp='1x';
+  statusArray:any[]=[
+    {id:1,status:'All',code:0},
+    {id:2,status:'Pending',code:1},
+    {id:3,status:'Approved',code:2},
+    {id:4,status:'Returned',code:3},
+    {id:4,status:'Rejected',code:4},  
+  ];
+  selectedStatus:number=0;
+  searchTerm:string="";
   roleId:number=Number(this.api.getTokenFields('RoleId'));
   userId:number=Number(this.api.getTokenFields('UserId'));
-  url:string=this.roleId===1 ? `https://localhost:7084/api/transaction/` : `https://localhost:7084/api/transaction/${this.userId}`;
+  url:string=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}` : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}`;
   books:any[]=[];
-  constructor (private router:Router,private api:ApiMethodsService){
+  onSearchChange() {
+    if(this.roleId===1){
+      this.url=`https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}`;
+    }
+    else{
+      this.url=`https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}`;
+    }
     this.getBorrowedBooks();
-  }
+   }
+
   getBorrowedBooks(){
     this.api.getDataFromApi(this.url).subscribe((response:any)=>{
       this.books=response.data.map((book:any)=> ({
