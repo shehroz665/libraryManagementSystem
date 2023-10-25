@@ -34,4 +34,25 @@ export class ApplyComponent {
   navigateToSpecificRoute(){
     this.router.navigate(["home/book/apply/new"]);
   }
+  update(id:number,transactionObj:any,status:number){   
+    const data = {
+      TransStuId: transactionObj.TransStuId,
+      TransBookId: transactionObj.TransBookId,
+      BorrowedDate: transactionObj.BorrowedDate,
+      DueDate: transactionObj.DueDate,
+      ReturnedDate: transactionObj.ReturnedDate,
+      Status: status,
+      UserId:transactionObj.UserId,
+    }
+    this.api.updateDataUsingApi(`https://localhost:7084/api/transaction/update/${id}`,data).subscribe((response:any)=> {
+      if (response.statuscode === 200) {
+        this.api.successAlert(response.message);
+        this.getBorrowedBooks();
+      }
+      else {
+        this.api.errorAlert(response.message);
+      }
+    })
+    
+  }
 }

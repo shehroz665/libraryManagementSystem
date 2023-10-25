@@ -16,7 +16,7 @@
                         <th scope="col" class="text-center">Title</th>
                         <th scope="col" class="text-center">Borrow Date</th>
                         <th scope="col" class="text-center">Due Date</th>
-                        <th scope="col" class="text-center">Return Date</th>
+                        <th scope="col" class="text-center">Last Return Date</th>
                         <th scope="col" class="text-center">Applicant</th>
                         <th scope="col" class="text-center">Status</th>
                         <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
@@ -35,11 +35,11 @@
                             <div class="d-flex flex-row justify-content-center">
                                 <div>
                                     <fa-icon [icon]="approvedIcon" [size]="sizeIcon" [style.color]="'green'" class="m-1"
-                                        style="font-size:20px"></fa-icon>
+                                        style="font-size:20px" (click)="update(book.TransID,book,2)" ></fa-icon>
                                     <fa-icon [icon]="returnedIcon" [size]="sizeIcon" [style.color]="'teal'" class="m-1"
-                                        style="font-size:20px"></fa-icon>                                     
+                                        style="font-size:20px" (click)="update(book.TransID,book,3)"></fa-icon>                                     
                                     <fa-icon class="m-1" [icon]="rejectedIcon" [style.color]="'rgb(195, 41, 41)'"
-                                        style="font-size:20px"></fa-icon>
+                                        style="font-size:20px" (click)="update(book.TransID,book,4)"></fa-icon>
                                 </div>
                             </div>
                         </td>
