@@ -13,6 +13,7 @@ import { IsbnFormatterPipe } from '../Pipes/isbn-formatter.pipe';
 import { ApplyComponent } from './apply/apply.component';
 import { NewComponent } from './new/new.component';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     ViewbooksComponent,
@@ -29,7 +30,8 @@ import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     ReactiveFormsModule,
     NgToggleModule,
-    NgbDatepicker
+    NgbDatepicker,
+    MatTooltipModule
   ]
 })
 export class BookModule { }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
-import { faPenToSquare, faTrash ,faCheck,faXmark,faRotateLeft} from '@fortawesome/free-solid-svg-icons';
+import { faCheck,faXmark,faRotateLeft,faCircleCheck} from '@fortawesome/free-solid-svg-icons';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 @Component({
   selector: 'app-apply',
@@ -9,11 +9,10 @@ import { SizeProp } from '@fortawesome/fontawesome-svg-core';
   styleUrls: ['./apply.component.css']
 })
 export class ApplyComponent {
-  updateIcon=faPenToSquare;
-  trashIcon=faTrash;
   approvedIcon=faCheck;
   rejectedIcon=faXmark;
   returnedIcon=faRotateLeft;
+  checkedIcon=faCircleCheck;
   sizeIcon:SizeProp='1x';
   roleId:number=Number(this.api.getTokenFields('RoleId'));
   userId:number=Number(this.api.getTokenFields('UserId'));
