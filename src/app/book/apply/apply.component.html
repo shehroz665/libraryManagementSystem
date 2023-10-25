@@ -19,6 +19,7 @@
                         <th scope="col" class="text-center">Return Date</th>
                         <th scope="col" class="text-center">Applicant</th>
                         <th scope="col" class="text-center">Status</th>
+                        <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,18 @@
                         <td class="text-center">{{ book.ReturnedDate ? (book.ReturnedDate | date): '-' }}</td>
                         <td class="text-center">{{ book.Email }}</td>
                         <td class="text-center" [style.color]="book.bookStatusColor">{{book.bookStatus}}</td>
+                        <td class="text-center" *ngIf="roleId===1">
+                            <div class="d-flex flex-row justify-content-center">
+                                <div>
+                                    <fa-icon [icon]="approvedIcon" [size]="sizeIcon" [style.color]="'green'" class="m-1"
+                                        style="font-size:20px"></fa-icon>
+                                    <fa-icon [icon]="returnedIcon" [size]="sizeIcon" [style.color]="'teal'" class="m-1"
+                                        style="font-size:20px"></fa-icon>                                     
+                                    <fa-icon class="m-1" [icon]="rejectedIcon" [style.color]="'rgb(195, 41, 41)'"
+                                        style="font-size:20px"></fa-icon>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
