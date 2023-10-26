@@ -19,7 +19,7 @@
                             <div>
                                 <div>
                                     <label for="selectedBook" class="px-1">Title</label>
-                                    <select id="selectedBook" name="selectedBook" [(ngModel)]="selectedBook" (change)="onTitleChange($event)" class="rounded"
+                                    <select id="selectedBook" name="selectedBook" [(ngModel)]="selectedBook" (change)="onTitleChange()" class="rounded"
                                       >
                                         <option *ngFor="let item of booksTitle" [value]="item.TransBookId">{{item.Title}}</option>
                                     </select>
@@ -34,7 +34,7 @@
                             <div>
                                 <div>
                                     <label for="selectedStatus" class="px-1">Status</label>
-                                    <select  id="selectedStatus" name="selectedStatus" [(ngModel)]="selectedStatus" (change)="onStatusChange($event)" class="rounded">
+                                    <select  id="selectedStatus" name="selectedStatus" [(ngModel)]="selectedStatus" (change)="onStatusChange()" class="rounded">
                                         <option *ngFor="let item of statusArray" [value]="item.code">{{item.status}}</option>
                                     </select>
                                 </div>
@@ -46,7 +46,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let book of books;index as i">
-                        <th scope="row">{{ book.TransID}}</th>
+                        <th scope="row">{{ i+1}}</th>
                         <td class="text-center">{{ book.Title }}</td>
                         <td class="text-center">{{book.BorrowedDate | date}}</td>
                         <td class="text-center">{{ book.DueDate | date }}</td>

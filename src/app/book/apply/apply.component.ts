@@ -44,8 +44,8 @@ export class ApplyComponent {
     }
     this.getBorrowedBooks();
    }
-  onStatusChange(event:Event){
-    const selected:number=Number((event.target as HTMLSelectElement).value);
+  onStatusChange(){
+    const selected:number=Number(this.selectedStatus);
     if(selected!=0){
     this.books= this.booksBackUp.filter((i)=> i.Status===selected);  
     }
@@ -54,12 +54,12 @@ export class ApplyComponent {
     }
 
    }
-  onTitleChange(event:Event){
-    console.log(this.selectedBook);
-    
-    const selected=Number((event.target as HTMLSelectElement).value);
-   if(selected!=0){
+  onTitleChange(){
+    const selected:number=Number(this.selectedBook)    
+    if(selected!=0){
     this.books=this.booksBackUp.filter((i)=> i.TransBookId===selected);
+    console.log(this.books);
+    
    }
    else{
     this.books=this.booksBackUp;
