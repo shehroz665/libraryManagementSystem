@@ -18,7 +18,6 @@ export class ApplyComponent {
   rejectedIcon=faXmark;
   returnedIcon=faRotateLeft;
   checkedIcon=faCircleCheck;
-  default:string="All";
   sizeIcon:SizeProp='1x';
   booksTitle:any[]=[];
   statusArray:any[]=[
@@ -29,7 +28,7 @@ export class ApplyComponent {
     {id:4,status:'Rejected',code:4},  
   ];
   selectedStatus:number=0;
-  selectedBook:string='All';
+  selectedBook:string='';
   searchTerm:string="";
   roleId:number=Number(this.api.getTokenFields('RoleId'));
   userId:number=Number(this.api.getTokenFields('UserId'));

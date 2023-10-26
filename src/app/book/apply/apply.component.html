@@ -16,13 +16,16 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col" class="text-center">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            <div>
+                                <div>
                                     <label for="selectedBook" class="px-1">Title</label>
+                                    <select id="selectedBook" name="selectedBook" #selectedBook
+                                     (change)="onTitleChange($event)" formControlName="selectedBook"
+                                      class="rounded"
+                                      >
+                                        <option *ngFor="let item of booksTitle" [value]="item.Title">{{item.Title}}</option>
+                                    </select>
                                 </div>
-                                <select id="selectedBook" name="selectedBook" #selectedBook (change)="onTitleChange($event)" formControlName="selectedBook" class="rounded">
-                                    <option *ngFor="let item of booksTitle" [value]="item.Title">{{item.Title}}</option>
-                                </select>
                             </div>
                         </th>
                         <th scope="col" class="text-center">Borrow Date</th>
@@ -30,13 +33,14 @@
                         <th scope="col" class="text-center">Last Return Date</th>
                         <th scope="col" class="text-center">Applicant</th>
                         <th scope="col" class="text-center">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            <div>
+                                <div>
                                     <label for="selectedStatus" class="px-1">Status</label>
+                                    <select  id="selectedStatus" name="selectedStatus" #selectedStatus (change)="onStatusChange($event)" formControlName="selectedStatus" class="rounded">
+                                        <option *ngFor="let item of statusArray" [value]="item.code">{{item.status}}</option>
+                                    </select>
                                 </div>
-                                <select id="selectedStatus" name="selectedStatus" #selectedStatus (change)="onStatusChange($event)" formControlName="selectedStatus" class="rounded">
-                                    <option *ngFor="let item of statusArray" [value]="item.code">{{item.status}}</option>
-                                </select>
+
                             </div>
                         </th>
                         <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
