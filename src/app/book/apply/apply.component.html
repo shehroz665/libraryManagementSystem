@@ -25,8 +25,8 @@
                                 <div class="input-group-prepend">
                                     <label for="selectedStatus" class="px-1">Status</label>
                                 </div>
-                                <select id="selectedStatus" name="selectedStatus" #selectedStatus formControlName="selectedStatus" class="rounded">
-                                    <option *ngFor="let item of statusArray">{{item.status}}</option>
+                                <select id="selectedStatus" name="selectedStatus" #selectedStatus (change)="onStatusChange($event)" formControlName="selectedStatus" class="rounded">
+                                    <option *ngFor="let item of statusArray" [value]="item.code">{{item.status}}</option>
                                 </select>
                             </div>
                         </th>

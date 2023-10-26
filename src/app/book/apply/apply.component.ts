@@ -31,6 +31,7 @@ export class ApplyComponent {
   userId:number=Number(this.api.getTokenFields('UserId'));
   url:string=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}` : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}`;
   books:any[]=[];
+  booksBackUp:any[]=[];
   onSearchChange() {
     if(this.roleId===1){
       this.url=`https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}`;
@@ -40,6 +41,18 @@ export class ApplyComponent {
     }
     this.getBorrowedBooks();
    }
+  onStatusChange(event:Event){
+    const selected:number=Number((event.target as HTMLSelectElement).value);
+    if(selected!=0){
+    this.books= this.booksBackUp.filter((i)=> i.Status===selected);
+      console.log(selected,this.books);
+      
+    }
+    else{
+      this.books=this.booksBackUp;
+    }
+
+   }
 
   getBorrowedBooks(){
     this.api.getDataFromApi(this.url).subscribe((response:any)=>{
@@ -47,7 +60,8 @@ export class ApplyComponent {
         ...book,
         bookStatus: book.Status===1? 'Pending' : (book.Status===2 ? 'Approved' : (book.Status===3 ? 'Returned' : (book.Status===4 ? 'Rejected' : '-') ) ),
         bookStatusColor: book.Status===1? '#F4CE14' : (book.Status===2 ? 'green' : (book.Status===3 ? 'teal' : (book.Status===4 ? 'red' : 'black') ) ),
-      }))  
+      }))
+      this.booksBackUp=this.books;
     }); 
   }
   navigateToSpecificRoute(){
