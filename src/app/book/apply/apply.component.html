@@ -15,7 +15,16 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" class="text-center">Title</th>
+                        <th scope="col" class="text-center">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <label for="selectedBook" class="px-1">Title</label>
+                                </div>
+                                <select id="selectedBook" name="selectedBook" #selectedBook (change)="onTitleChange($event)" formControlName="selectedBook" class="rounded">
+                                    <option *ngFor="let item of booksTitle" [value]="item.Title">{{item.Title}}</option>
+                                </select>
+                            </div>
+                        </th>
                         <th scope="col" class="text-center">Borrow Date</th>
                         <th scope="col" class="text-center">Due Date</th>
                         <th scope="col" class="text-center">Last Return Date</th>

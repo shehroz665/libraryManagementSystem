@@ -12,12 +12,15 @@ import { NgModel } from '@angular/forms';
 export class ApplyComponent {
   constructor (private router:Router,private api:ApiMethodsService){
     this.getBorrowedBooks();
+    this.getBooksDropdown();
   }
   approvedIcon=faCheck;
   rejectedIcon=faXmark;
   returnedIcon=faRotateLeft;
   checkedIcon=faCircleCheck;
+  default:string="All";
   sizeIcon:SizeProp='1x';
+  booksTitle:any[]=[];
   statusArray:any[]=[
     {id:1,status:'All',code:0},
     {id:2,status:'Pending',code:1},
@@ -26,6 +29,7 @@ export class ApplyComponent {
     {id:4,status:'Rejected',code:4},  
   ];
   selectedStatus:number=0;
+  selectedBook:string='All';
   searchTerm:string="";
   roleId:number=Number(this.api.getTokenFields('RoleId'));
   userId:number=Number(this.api.getTokenFields('UserId'));
@@ -44,16 +48,22 @@ export class ApplyComponent {
   onStatusChange(event:Event){
     const selected:number=Number((event.target as HTMLSelectElement).value);
     if(selected!=0){
-    this.books= this.booksBackUp.filter((i)=> i.Status===selected);
-      console.log(selected,this.books);
-      
+    this.books= this.booksBackUp.filter((i)=> i.Status===selected);  
     }
     else{
       this.books=this.booksBackUp;
     }
 
    }
-
+  onTitleChange(event:Event){
+    const selected=(event.target as HTMLSelectElement).value;
+   if(selected!="All"){
+    this.books=this.booksBackUp.filter((i)=> i.Title===selected);
+   }
+   else{
+    this.books=this.booksBackUp;
+   }
+  }
   getBorrowedBooks(){
     this.api.getDataFromApi(this.url).subscribe((response:any)=>{
       this.books=response.data.map((book:any)=> ({
@@ -63,6 +73,16 @@ export class ApplyComponent {
       }))
       this.booksBackUp=this.books;
     }); 
+  }
+  getBooksDropdown(){
+    this.api.getDataFromApi('https://localhost:7084/api/generic/bookTitle').subscribe((response:any)=> {
+      const obj= {
+        TransBookId:0,
+        Title:"All",
+      }
+      this.booksTitle.unshift(obj);
+      this.booksTitle = this.booksTitle.concat(response.data);
+    })
   }
   navigateToSpecificRoute(){
     this.router.navigate(["home/book/apply/new"]);
