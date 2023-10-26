@@ -15,6 +15,7 @@ import { NewComponent } from './new/new.component';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     ViewbooksComponent,
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     NgToggleModule,
     NgbDatepicker,
     MatTooltipModule,
-    FormsModule
+    FormsModule,
+    NgbPaginationModule
   ]
 })
 export class BookModule { }

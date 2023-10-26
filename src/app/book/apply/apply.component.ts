@@ -30,6 +30,10 @@ export class ApplyComponent {
   selectedStatus:number=0;
   selectedBook:number=0;
   searchTerm:string="";
+  pageSize:number=10;
+  from: number = 1;
+  to: number = 10;
+  collectionSize:number=0;
   roleId:number=Number(this.api.getTokenFields('RoleId'));
   userId:number=Number(this.api.getTokenFields('UserId'));
   url:string=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}` : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}`;
@@ -47,10 +51,12 @@ export class ApplyComponent {
   onStatusChange(){
     const selected:number=Number(this.selectedStatus);
     if(selected!=0){
-    this.books= this.booksBackUp.filter((i)=> i.Status===selected);  
+    this.books= this.booksBackUp.filter((i)=> i.Status===selected);
+    this.collectionSize=this.books.length;
     }
     else{
-      this.books=this.booksBackUp;
+      this.books=this.booksBackUp.slice(0,10);
+      this.collectionSize=this.booksBackUp.length;
     }
 
    }
@@ -58,11 +64,11 @@ export class ApplyComponent {
     const selected:number=Number(this.selectedBook)    
     if(selected!=0){
     this.books=this.booksBackUp.filter((i)=> i.TransBookId===selected);
-    console.log(this.books);
-    
+    this.collectionSize=this.books.length; 
    }
    else{
-    this.books=this.booksBackUp;
+    this.books=this.booksBackUp.slice(0,10);
+    this.collectionSize=this.booksBackUp.length;
    }
   }
   getBorrowedBooks(){
@@ -73,7 +79,15 @@ export class ApplyComponent {
         bookStatusColor: book.Status===1? '#F4CE14' : (book.Status===2 ? 'green' : (book.Status===3 ? 'teal' : (book.Status===4 ? 'red' : 'black') ) ),
       }))
       this.booksBackUp=this.books;
+      this.collectionSize=this.books.length;
+      this.books=this.books.slice(0,10);
+  
     }); 
+  }
+  pageChange(newPage: number){
+    this.to=newPage*10;
+    this.from=(this.to-10)+1;
+    this.books=this.booksBackUp.slice(this.from - 1, this.to);
   }
   getBooksDropdown(){
     this.api.getDataFromApi('https://localhost:7084/api/generic/bookTitle').subscribe((response:any)=> {
