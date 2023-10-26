@@ -20,8 +20,8 @@
                                 <div>
                                     <label for="selectedBook" class="px-1">Title</label>
                                     <select id="selectedBook" name="selectedBook" #selectedBook
-                                     (change)="onTitleChange($event)" formControlName="selectedBook"
-                                      class="rounded"
+                                    (change)="onTitleChange($event)" formControlName="selectedBook"
+                                     class="rounded"
                                       >
                                         <option *ngFor="let item of booksTitle" [value]="item.Title">{{item.Title}}</option>
                                     </select>
@@ -36,7 +36,7 @@
                             <div>
                                 <div>
                                     <label for="selectedStatus" class="px-1">Status</label>
-                                    <select  id="selectedStatus" name="selectedStatus" #selectedStatus (change)="onStatusChange($event)" formControlName="selectedStatus" class="rounded">
+                                    <select  id="selectedStatus" name="selectedStatus" [(ngModel)]="selectedStatus" (change)="onStatusChange($event)" class="rounded">
                                         <option *ngFor="let item of statusArray" [value]="item.code">{{item.status}}</option>
                                     </select>
                                 </div>
