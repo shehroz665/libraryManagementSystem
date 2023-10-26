@@ -10,10 +10,14 @@ import { SizeProp } from '@fortawesome/fontawesome-svg-core';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
+  page:number=1;
+  pageSize :number=10;
+  from: number = 1;
+  to: number = 10;
   roleId:number=0;
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
-  url:string=`https://localhost:7084/api/author/`;
+  url:string=`https://localhost:7084/api/author?from=${this.from}&to=${this.to}`;
   authors:any[]=[];
   constructor (private router:Router,private authorData:ApiMethodsService){
     this.getAuthors();
@@ -21,7 +25,9 @@ export class ViewComponent {
   }
   getAuthors(){
     this.authorData.getDataFromApi(this.url).subscribe((response:any)=>{
-      this.authors=response.data.map((author:any)=> ({
+      console.log(response);
+      this.pageSize=response.data.count;
+      this.authors=response.data.data.map((author:any)=> ({
         ...author,
         toggleValue:author.Status===1 ? true: false,
       }));
@@ -56,5 +62,12 @@ export class ViewComponent {
         this.authorData.errorAlert(response.message);
       }
     });
+  }
+  pageChange(newPage:number){
+    console.log(newPage);
+    this.to=newPage*10;
+    this.from=(this.to-10)+1;
+    this.url=`https://localhost:7084/api/author?from=${this.from}&to=${this.to}`;
+    this.getAuthors();  
   }
 }

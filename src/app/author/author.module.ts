@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgToggleModule } from 'ng-toggle-button';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     ViewComponent,
@@ -21,7 +22,8 @@ import { NgToggleModule } from 'ng-toggle-button';
     HttpClientModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    NgToggleModule
+    NgToggleModule,
+    NgbPaginationModule
   ]
 })
 export class AuthorModule { }

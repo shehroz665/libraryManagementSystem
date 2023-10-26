@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let author of authors;index as i">
-                        <th scope="row">{{ author.AuthId }}</th>
+                        <th scope="row">{{ from+i }}</th>
                         <td class="text-center">{{ author.AuthName }}</td>
                         <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': author.Status===1? '#067e00' : 'rgb(184, 16, 16)'}">{{
                             author.Status===1? 'Active' :'Deactivated' }}</td>
@@ -44,6 +44,10 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div>
+            <ngb-pagination [collectionSize]="pageSize" [(page)]="page" (pageChange)="pageChange($event)" aria-label="Default pagination"></ngb-pagination>
+
         </div>
     </div>
 
