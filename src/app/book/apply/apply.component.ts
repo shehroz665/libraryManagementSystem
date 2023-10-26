@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
-import { faCheck,faXmark,faRotateLeft,faCircleCheck} from '@fortawesome/free-solid-svg-icons';
+import { faCheck,faXmark,faRotateLeft,faCircleCheck,faCircleXmark} from '@fortawesome/free-solid-svg-icons';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 import { NgModel } from '@angular/forms';
 @Component({
@@ -18,6 +18,7 @@ export class ApplyComponent {
   rejectedIcon=faXmark;
   returnedIcon=faRotateLeft;
   checkedIcon=faCircleCheck;
+  isRejectedIcon=faCircleXmark;
   sizeIcon:SizeProp='1x';
   booksTitle:any[]=[];
   statusArray:any[]=[
