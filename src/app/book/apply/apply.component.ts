@@ -37,12 +37,13 @@ export class ApplyComponent {
   collectionSize:number=0;
   roleId:number=Number(this.api.getTokenFields('RoleId'));
   userId:number=Number(this.api.getTokenFields('UserId'));
-  url:string=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}` : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}`;
+  url:string=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}` : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}`;
   books:any[]=[];
   booksBackUp:any[]=[];
   onSearchChange() {
     if(this.roleId===1){
-      this.url=`https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}`;
+      this.url=`https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}`;
+      this.getBorrowedBooks();
     }
     else{
       this.url=`https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}`;
@@ -53,11 +54,9 @@ export class ApplyComponent {
     const selected:number=Number(this.selectedStatus);
     if(selected!=0){
     this.books= this.booksBackUp.filter((i)=> i.Status===selected);
-    this.collectionSize=this.books.length;
     }
     else{
-      this.books=this.booksBackUp.slice(0,10);
-      this.collectionSize=this.booksBackUp.length;
+      this.books=this.booksBackUp;
     }
 
    }
@@ -65,30 +64,29 @@ export class ApplyComponent {
     const selected:number=Number(this.selectedBook)    
     if(selected!=0){
     this.books=this.booksBackUp.filter((i)=> i.TransBookId===selected);
-    this.collectionSize=this.books.length; 
    }
    else{
-    this.books=this.booksBackUp.slice(0,10);
-    this.collectionSize=this.booksBackUp.length;
+    this.books=this.booksBackUp;
    }
   }
   getBorrowedBooks(){
     this.api.getDataFromApi(this.url).subscribe((response:any)=>{
-      this.books=response.data.map((book:any)=> ({
+      this.collectionSize=response.data.count;
+      this.books=response.data.Data.map((book:any)=> ({
         ...book,
         bookStatus: book.Status===1? 'Pending' : (book.Status===2 ? 'Approved' : (book.Status===3 ? 'Returned' : (book.Status===4 ? 'Rejected' : '-') ) ),
         bookStatusColor: book.Status===1? '#F4CE14' : (book.Status===2 ? 'green' : (book.Status===3 ? 'teal' : (book.Status===4 ? 'red' : 'black') ) ),
       }))
-      this.booksBackUp=this.books;
-      this.collectionSize=this.books.length;
-      this.books=this.books.slice(0,10);
-  
+      this.booksBackUp=this.books;  
     }); 
   }
   pageChange(newPage: number){
     this.to=newPage*10;
     this.from=(this.to-10)+1;
-    this.books=this.booksBackUp.slice(this.from - 1, this.to);
+    if(this.roleId===1){
+      this.url= `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}`;
+      this.getBorrowedBooks();
+    }
   }
   getBooksDropdown(){
     this.api.getDataFromApi('https://localhost:7084/api/generic/bookTitle').subscribe((response:any)=> {
