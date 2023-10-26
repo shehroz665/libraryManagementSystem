@@ -19,11 +19,9 @@
                             <div>
                                 <div>
                                     <label for="selectedBook" class="px-1">Title</label>
-                                    <select id="selectedBook" name="selectedBook" #selectedBook
-                                    (change)="onTitleChange($event)" formControlName="selectedBook"
-                                     class="rounded"
+                                    <select id="selectedBook" name="selectedBook" [(ngModel)]="selectedBook" (change)="onTitleChange($event)" class="rounded"
                                       >
-                                        <option *ngFor="let item of booksTitle" [value]="item.Title">{{item.Title}}</option>
+                                        <option *ngFor="let item of booksTitle" [value]="item.TransBookId">{{item.Title}}</option>
                                     </select>
                                 </div>
                             </div>

@@ -28,7 +28,7 @@ export class ApplyComponent {
     {id:4,status:'Rejected',code:4},  
   ];
   selectedStatus:number=0;
-  selectedBook:string='';
+  selectedBook:number=0;
   searchTerm:string="";
   roleId:number=Number(this.api.getTokenFields('RoleId'));
   userId:number=Number(this.api.getTokenFields('UserId'));
@@ -55,9 +55,11 @@ export class ApplyComponent {
 
    }
   onTitleChange(event:Event){
-    const selected=(event.target as HTMLSelectElement).value;
-   if(selected!="All"){
-    this.books=this.booksBackUp.filter((i)=> i.Title===selected);
+    console.log(this.selectedBook);
+    
+    const selected=Number((event.target as HTMLSelectElement).value);
+   if(selected!=0){
+    this.books=this.booksBackUp.filter((i)=> i.TransBookId===selected);
    }
    else{
     this.books=this.booksBackUp;
