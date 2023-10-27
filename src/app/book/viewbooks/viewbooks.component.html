@@ -63,6 +63,12 @@
                 </tbody>
             </table>
         </div>
+        <div class="container d-flex justify-content-end">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="pageSize"
+            (pageChange)="pageChange($event)"
+            aria-label="Default pagination"
+               ></ngb-pagination>
+    </div>
     </div>
 
 </div>

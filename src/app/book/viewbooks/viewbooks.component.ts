@@ -9,11 +9,15 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
   styleUrls: ['./viewbooks.component.css']
 })
 export class ViewbooksComponent {
+  pageSize:number=10;
+  from: number = 1;
+  to: number = 10;
+  collectionSize:number=0;
   roleId:number=0;
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
   sizeIcon:SizeProp='1x';
-  url:string=`https://localhost:7084/api/books/`;
+  url:string=`https://localhost:7084/api/books?from=${this.from}&to=${this.to}`;
   books:any[]=[];
   constructor (private router:Router,private api:ApiMethodsService){
     this.getBooks();
@@ -21,7 +25,8 @@ export class ViewbooksComponent {
   }
   getBooks(){
     this.api.getDataFromApi(this.url).subscribe((response:any)=>{
-      this.books=response.data.map((book:any)=> ({
+      this.collectionSize=response.data.count;
+      this.books=response.data.data.map((book:any)=> ({
         ...book,
         toggleValue:book.Status===1 ? true : false
       }));      
@@ -56,5 +61,11 @@ export class ViewbooksComponent {
         this.api.errorAlert(response.message);
       }
     });
+  }
+  pageChange(newPage:number){
+    this.to=newPage*10;
+    this.from=(this.to-10)+1;
+    this.url=`https://localhost:7084/api/books?from=${this.from}&to=${this.to}`;
+    this.getBooks();
   }
 }
