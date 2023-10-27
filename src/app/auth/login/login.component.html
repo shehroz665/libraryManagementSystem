@@ -13,6 +13,7 @@
                       name="email"
                       formControlName="email"
                       class="form-control"
+                      autocomplete="off"
                   />
                   <span style="color: red;" *ngIf="getControl('email') && getControl('email')?.invalid && getControl('email')?.touched">This field is required</span>
                 </div>
@@ -20,6 +21,7 @@
                   <label for="password" class="mb-2">Password</label>
                   <input
                       #password
+                      type="password"
                       id="password"
                       name="password"
                       formControlName="password"

@@ -10,11 +10,11 @@
                 <div class="form-group m-2">
                     <label for="AuthName" class="mb-2">Author Name</label>
                     <input
-                        #AuthName
                         id="AuthName"
                         name="AuthName"
                         formControlName="AuthName"
                         class="form-control"
+                        autocomplete="off"
                     />
                     <span style="color: red;" *ngIf="authName && authName.invalid && authName.touched">This field is required</span>
                 </div>

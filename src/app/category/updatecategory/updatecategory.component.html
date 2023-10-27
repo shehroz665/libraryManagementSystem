@@ -10,11 +10,11 @@
                 <div class="form-group m-2">
                     <label for="CatName" class="mb-2">Category Name</label>
                     <input
-                        #CatName
                         id="CatName"
                         name="CatName"
                         formControlName="CatName"
                         class="form-control"
+                        autocomplete="off"
                     />
                     <span style="color: red;" *ngIf="catName && catName.invalid && catName.touched">This field is required</span>
                 </div>

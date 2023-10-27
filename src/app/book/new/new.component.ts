@@ -20,7 +20,6 @@ export class NewComponent {
     book: new FormControl('', [Validators.required]),
     borrowDate: new FormControl('', [Validators.required]),
     dueDate: new FormControl('', [Validators.required]),
-    // returnDate:new FormControl('', [Validators.required]),
   });
   getControl(controlName: string) {
     return this.applyBookForm.get(controlName);
