@@ -37,7 +37,7 @@ export class ApplyComponent {
   collectionSize:number=0;
   roleId:number=Number(this.api.getTokenFields('RoleId'));
   userId:number=Number(this.api.getTokenFields('UserId'));
-  url:string=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}` : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}`;
+  url:string=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}` : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}`;
   books:any[]=[];
   booksBackUp:any[]=[];
   onSearchChange() {
@@ -61,13 +61,21 @@ export class ApplyComponent {
 
    }
   onTitleChange(){
-    const selected:number=Number(this.selectedBook)    
+    const selected:number=Number(this.selectedBook);
     if(selected!=0){
-    this.books=this.booksBackUp.filter((i)=> i.TransBookId===selected);
-   }
-   else{
-    this.books=this.booksBackUp;
-   }
+      const find= this.booksTitle.find((x)=> x.TransBookId===selected);
+      this.url=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${find.Title}&from=${this.from}&to=${this.to}` 
+      :`https://localhost:7084/api/transaction/${this.userId}?searchTerm=${find.Title}&from=${this.from}&to=${this.to}`;
+      console.log(this.url);
+      
+      this.getBorrowedBooks();
+    }
+    else{
+      const find="";
+      this.url=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${find}&from=${this.from}&to=${this.to}` 
+      :`https://localhost:7084/api/transaction/${this.userId}?searchTerm=${find}&from=${this.from}&to=${this.to}`;
+      this.getBorrowedBooks();
+    }
   }
   getBorrowedBooks(){
     this.api.getDataFromApi(this.url).subscribe((response:any)=>{
@@ -85,8 +93,11 @@ export class ApplyComponent {
     this.from=(this.to-10)+1;
     if(this.roleId===1){
       this.url= `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}`;
-      this.getBorrowedBooks();
     }
+    else{
+      this.url= `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}`
+    }
+    this.getBorrowedBooks();
   }
   getBooksDropdown(){
     this.api.getDataFromApi('https://localhost:7084/api/generic/bookTitle').subscribe((response:any)=> {
