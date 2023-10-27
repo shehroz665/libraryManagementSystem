@@ -27,7 +27,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let book of books;index as i">
-                        <th scope="row">{{ book.BookId }}</th>
+                        <th scope="row">{{ from+i }}</th>
                         <td class="text-center">{{ book.Title }}</td>
                         <td class="text-center">{{book.Isbn | isbnFormatter}}</td>
                         <td class="text-center">{{ book.CatName }}</td>

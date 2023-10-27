@@ -21,8 +21,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let category of categories;">
-                    <th scope="row">{{ category.CatId}}</th>
+                <tr *ngFor="let category of categories;index as i">
+                    <th scope="row">{{ from+i}}</th>
                     <td class="text-center">{{  category.CatName }}</td>
                     <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': category.Status===1? 'green' :'red'}">{{ category.Status===1? 'Active' :'Deactivated' }}</td>
                     <td class="text-center" *ngIf="roleId===1">
