@@ -13,7 +13,7 @@
             <thead>
                 <tr >
                     <th scope="col">#</th>
-                    <th scope="col" class="text-center">Genre</th>
+                    <th scope="col" class="text-left">Genre</th>
 
                         <th scope="col" class="text-center" *ngIf="roleId===1">Status</th>
                         <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
@@ -23,7 +23,7 @@
             <tbody>
                 <tr *ngFor="let category of categories;index as i">
                     <th scope="row">{{ from+i}}</th>
-                    <td class="text-center">{{  category.CatName }}</td>
+                    <td class="text-left">{{  category.CatName }}</td>
                     <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': category.Status===1? 'green' :'red'}">{{ category.Status===1? 'Active' :'Deactivated' }}</td>
                     <td class="text-center" *ngIf="roleId===1">
                         <div class="d-flex flex-row justify-content-center" >

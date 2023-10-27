@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-left">Name</th>
                         <th scope="col" class="text-center" *ngIf="roleId===1">Status</th>
                         <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
                     </tr>
@@ -21,7 +21,7 @@
                 <tbody>
                     <tr *ngFor="let author of authors;index as i">
                         <th scope="row">{{ from+i }}</th>
-                        <td class="text-center">{{ author.AuthName }}</td>
+                        <td class="text-left">{{ author.AuthName }}</td>
                         <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': author.Status===1? '#067e00' : 'rgb(184, 16, 16)'}">{{
                             author.Status===1? 'Active' :'Deactivated' }}</td>
                         <td class="text-center" *ngIf="roleId===1">
