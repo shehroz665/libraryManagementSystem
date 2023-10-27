@@ -34,10 +34,11 @@ export class ApplyComponent {
   pageSize:number=10;
   from: number = 1;
   to: number = 10;
+  status:number=0;
   collectionSize:number=0;
   roleId:number=Number(this.api.getTokenFields('RoleId'));
   userId:number=Number(this.api.getTokenFields('UserId'));
-  url:string=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}` : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}`;
+  url:string=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}&status=${this.status}` : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}&status=${this.status}`;
   books:any[]=[];
   booksBackUp:any[]=[];
   onSearchChange() {
@@ -52,28 +53,26 @@ export class ApplyComponent {
    }
   onStatusChange(){
     const selected:number=Number(this.selectedStatus);
-    if(selected!=0){
-    this.books= this.booksBackUp.filter((i)=> i.Status===selected);
-    }
-    else{
-      this.books=this.booksBackUp;
-    }
-
+    this.url=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}&status=${selected}` 
+    : `https://localhost:7084/api/transaction/${this.userId}?searchTerm=${this.searchTerm}&from=${this.from}&to=${this.to}&status=${selected}`;
+    console.log(this.url);
+    this.getBorrowedBooks();
    }
   onTitleChange(){
     const selected:number=Number(this.selectedBook);
+    const status=0;
     if(selected!=0){
       const find= this.booksTitle.find((x)=> x.TransBookId===selected);
-      this.url=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${find.Title}&from=${this.from}&to=${this.to}` 
-      :`https://localhost:7084/api/transaction/${this.userId}?searchTerm=${find.Title}&from=${this.from}&to=${this.to}`;
+
+      this.url=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${find.Title}&from=${this.from}&to=${this.to}&status=${status}` 
+      :`https://localhost:7084/api/transaction/${this.userId}?searchTerm=${find.Title}&from=${this.from}&to=${this.to}&status=${status}`;
       console.log(this.url);
-      
       this.getBorrowedBooks();
     }
     else{
       const find="";
-      this.url=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${find}&from=${this.from}&to=${this.to}` 
-      :`https://localhost:7084/api/transaction/${this.userId}?searchTerm=${find}&from=${this.from}&to=${this.to}`;
+      this.url=this.roleId===1 ? `https://localhost:7084/api/transaction?searchTerm=${find}&from=${this.from}&to=${this.to}&status=${status}` 
+      :`https://localhost:7084/api/transaction/${this.userId}?searchTerm=${find}&from=${this.from}&to=${this.to}&status=${status}`;
       this.getBorrowedBooks();
     }
   }
