@@ -46,7 +46,7 @@
             </tbody>
         </table>
         </div>
-        <div class="container d-flex justify-content-end">
+        <div *ngIf="categories.length!=0" class="container d-flex justify-content-end">
             <ngb-pagination [collectionSize]="collectionSize" [(page)]="pageSize"
             (pageChange)="pageChange($event)"
             aria-label="Default pagination"

@@ -80,7 +80,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="container d-flex justify-content-end">
+        <div *ngIf="books.length!=0" class="container d-flex justify-content-end">
                 <ngb-pagination [collectionSize]="collectionSize" [(page)]="pageSize" aria-label="Default pagination"
                     (pageChange)="pageChange($event)"></ngb-pagination>
         </div>
