@@ -11,37 +11,37 @@
                 <div class="form-group m-2 w-50">
                     <label for="Title" class="mb-2">Title</label>
                     <input
-                        #Title
                         id="Title"
                         name="Title"
                         formControlName="Title"
                         class="form-control"
+                        autocomplete=off
                     />
                     <span style="color: red;" *ngIf="getControl('Title') && getControl('Title')?.invalid && getControl('Title')?.touched">This field is required</span>
                 </div>
                 <div class="form-group m-2 w-50">
                     <label for="Isbn" class="mb-2">ISBN</label>
                     <input
-                        #Isbn
                         type="number"
                         id="Isbn"
                         name="Isbn"
                         formControlName="Isbn"
                         class="form-control"
                         maxlength="13"
+                        autocomplete=off
                     />
                     <span style="color: red;" *ngIf="getControl('Isbn') && getControl('Isbn')?.invalid && getControl('Isbn')?.touched">This field is required and should have 13 digits</span>
                 </div>
                 <div class="form-group m-2 w-50">
                     <label for="Isbn" class="mb-2">Price</label>
                     <input
-                        #Price
                         type="number"
                         id="Price"
                         name="Price"
                         formControlName="Price"
                         class="form-control"
                         maxlength="13"
+                        autocomplete=off
                     />
                     <span style="color: red;" *ngIf="getControl('Price') && getControl('Price')?.invalid && getControl('Price')?.touched">This field is required</span>
                 </div>
@@ -51,25 +51,25 @@
                 <div class="form-group m-2 w-50">
                     <label for="ActualQuantity" class="mb-2">Actual Quantity</label>
                     <input
-                        #ActualQuantity
                         type="number"
                         id="ActualQuantity"
                         name="ActualQuantity"
                         formControlName="ActualQuantity"
                         class="form-control"
+                        autocomplete=off
                     />
                     <span style="color: red;" *ngIf="getControl('ActualQuantity') && getControl('ActualQuantity')?.invalid && getControl('ActualQuantity')?.touched">This field is required</span>
                 </div>
                 <div class="form-group m-2 w-50">
                     <label for="AvailableQuantity" class="mb-2">Available Quantity</label>
                     <input
-                        #AvailableQuantity
                         type="number"
                         id="AvailableQuantity"
                         name="AvailableQuantity"
                         formControlName="AvailableQuantity"
                         class="form-control"
                         maxlength="13"
+                        autocomplete=off
                     />
                     <span style="color: red;" *ngIf="getControl('AvailableQuantity') && getControl('AvailableQuantity')?.invalid && getControl('AvailableQuantity')?.touched">This field is required</span>
                 </div>
@@ -79,7 +79,6 @@
                 <div class="form-group m-2 w-50">
                     <label for="BookAuthId" class="mb-2">Author</label>
                     <select
-                        #BookAuthId
                         id="BookAuthId"
                         name="BookAuthId"
                         formControlName="BookAuthId"
@@ -93,7 +92,6 @@
                 <div class="form-group m-2 w-50">
                     <label for="BookCatId" class="mb-2">Category</label>
                     <select
-                        #BookCatId
                         id="BookCatId"
                         name="BookCatId"
                         formControlName="BookCatId"
