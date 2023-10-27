@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { NgToggleModule } from 'ng-toggle-button';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     ViewcategoryComponent,
@@ -21,7 +22,8 @@ import { NgToggleModule } from 'ng-toggle-button';
     ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
-    NgToggleModule
+    NgToggleModule,
+    NgbPaginationModule
   ]
 })
 export class CategoryModule { }

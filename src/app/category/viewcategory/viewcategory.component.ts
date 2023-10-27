@@ -10,8 +10,13 @@ import jwtDecode from 'jwt-decode';
   styleUrls: ['./viewcategory.component.css']
 })
 export class ViewcategoryComponent {
+  pageSize:number=10;
+  from: number = 1;
+  to: number = 10;
+  status:number=0;
+  collectionSize:number=0;
   roleId:number=0;
-  url:string=`https://localhost:7084/api/category`;
+  url:string=`https://localhost:7084/api/category?from=${this.from}&to=${this.to}`;
   token:any=localStorage.getItem("token");
   categories:any[]=[];
   updateIcon=faPenToSquare;
@@ -23,7 +28,9 @@ export class ViewcategoryComponent {
   }
   getCategory(){
     this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
-      this.categories=response.data.map((category:any)=>({
+      console.log(response);
+      this.collectionSize=response.data.count;
+      this.categories=response.data.data.map((category:any)=>({
         ...category,
         toggleValue:category.Status===1 ? true : false
       }));
@@ -59,5 +66,11 @@ export class ViewcategoryComponent {
         this.apiData.errorAlert(response.message);
       }
     })
+  }
+  pageChange(newPage:number){
+    this.to=newPage*10;
+    this.from=(this.to-10)+1;
+    this.url=`https://localhost:7084/api/category?from=${this.from}&to=${this.to}`;
+    this.getCategory();
   }
 }
