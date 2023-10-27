@@ -13,7 +13,6 @@ export class ViewcategoryComponent {
   pageSize:number=10;
   from: number = 1;
   to: number = 10;
-  status:number=0;
   collectionSize:number=0;
   roleId:number=0;
   url:string=`https://localhost:7084/api/category?from=${this.from}&to=${this.to}`;
