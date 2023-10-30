@@ -53,7 +53,9 @@ export class ViewComponent {
     this.router.navigate(["home/author/add"]);
   }
   deleteAuthor(data:any){
-    var deleteUrl=this.url+`delete/${data.AuthId}`;
+    var deleteUrl=`https://localhost:7084/api/author/delete/${data.AuthId}`;
+    console.log(deleteUrl);
+    
     this.authorData.updateDataUsingApi(deleteUrl,{}).subscribe((response:any)=>{
       if(response.statuscode===200){
         this.authorData.successAlert(response.message);

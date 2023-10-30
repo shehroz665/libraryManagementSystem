@@ -52,7 +52,7 @@ export class ViewbooksComponent {
     this.router.navigate(["home/book/add"]);
   }
   deleteBook(data:any){
-    var deleteUrl=this.url+`delete/${data.BookId}`;
+    var deleteUrl=`https://localhost:7084/api/books/delete/${data.BookId}`;
     this.api.updateDataUsingApi(deleteUrl,{}).subscribe((response:any)=>{
       if(response.statuscode===200){
         this.api.successAlert(response.message);

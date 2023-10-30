@@ -8,29 +8,28 @@
             <div class="form-group m-2">
               <label for="email" class="mb-2">Email</label>
               <input
-                  #email
                   id="email"
                   name="email"
                   formControlName="email"
                   class="form-control"
+                  autocomplete="off"
               />
               <span style="color: red;" *ngIf="getControl('email') && getControl('email')?.invalid && getControl('email')?.touched">This field is required</span>
             </div>
             <div class="form-group m-2">
               <label for="password" class="mb-2">Password</label>
               <input
-                  #password
                   id="password"
                   name="password"
                   formControlName="password"
                   class="form-control"
+                  autocomplete="off"
               />
               <span style="color: red;" *ngIf="getControl('password') && getControl('password')?.invalid && getControl('password')?.touched">This field is required</span>
             </div>
             <div class="form-group m-2">
                 <label for="roleId" class="mb-2">Role</label>
                 <select
-                #roleId
                 id="roleId"
                 name="roleId"
                 formControlName="roleId"

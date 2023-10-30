@@ -21,7 +21,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" class="text-center">Title</th>
+                        <th scope="col" class="text-left">Title</th>
                         <th scope="col" class="text-center">ISBN</th>
                         <th scope="col" class="text-center">Category</th>
                         <th scope="col" class="text-center">Author</th>
@@ -36,7 +36,7 @@
                 <tbody>
                     <tr *ngFor="let book of books;index as i">
                         <th scope="row">{{ from+i }}</th>
-                        <td class="text-center">{{ book.Title }}</td>
+                        <td class="text-left">{{ book.Title }}</td>
                         <td class="text-center">{{book.Isbn | isbnFormatter}}</td>
                         <td class="text-center">{{ book.CatName }}</td>
                         <td class="text-center">{{ book.AuthName }}</td>
