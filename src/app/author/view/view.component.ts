@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router'
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
-import { faTrash ,faPenToSquare} from '@fortawesome/free-solid-svg-icons';
-import { SizeProp } from '@fortawesome/fontawesome-svg-core';
+import { faTrash ,faPenToSquare,faExpand,faArrowDown,faArrowUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view',
@@ -18,6 +17,10 @@ export class ViewComponent {
   roleId:number=0;
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
+  expandIcon=faExpand;
+  upIcon=faArrowUp;
+  downIcon=faArrowDown;
+  expand:boolean=false;
   url:string=`https://localhost:7084/api/author?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
   authors:any[]=[];
   constructor (private router:Router,private authorData:ApiMethodsService){
@@ -26,13 +29,17 @@ export class ViewComponent {
   }
   getAuthors(){
     this.authorData.getDataFromApi(this.url).subscribe((response:any)=>{
-      // console.log(response);
       this.pageSize=response.data.count;
+      console.log(response.data.data);
+      
       this.authors=response.data.data.map((author:any)=> ({
         ...author,
         toggleValue:author.Status===1 ? true: false,
+        isexpandRow:false,
       }));
     });
+  
+    
   }
   toggleChanged(id:number){
     this.authorData.updateDataUsingApi(`https://localhost:7084/api/author/changeStatus/${id}`,{}).subscribe((response:any)=>{
