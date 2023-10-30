@@ -4,8 +4,16 @@
             <div class="p-2 text-black ">
                 <h4 class="heading">View Book Categories</h4>
             </div>
-            <div class="mx-2 my-2" *ngIf="roleId===1">
-                <button class="btn btn-primary" (click)="navigateToSpecificRoute()">Add Category</button> 
+            <div class="mx-2 my-2 d-flex flex-row">
+                <div class="mx-2">
+                    <input type="search" class="form-control" [(ngModel)]="searchTerm"
+                    (ngModelChange)="onSearchChange()" placeholder="Search" />
+                </div>
+                <div>
+                    <button *ngIf="roleId==1" class="btn btn-primary" (click)="navigateToSpecificRoute()">Add Category</button>
+                </div>
+
+
             </div>
         </div>
         <div class="container">

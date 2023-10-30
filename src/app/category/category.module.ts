@@ -5,7 +5,7 @@ import { CategoryRoutingModule } from './category-routing.module';
 import { ViewcategoryComponent } from './viewcategory/viewcategory.component';
 import { AddcategoryComponent } from './addcategory/addcategory.component';
 import { UpdatecategoryComponent } from './updatecategory/updatecategory.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { NgToggleModule } from 'ng-toggle-button';
@@ -23,7 +23,8 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     FontAwesomeModule,
     HttpClientModule,
     NgToggleModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    FormsModule
   ]
 })
 export class CategoryModule { }

@@ -10,7 +10,8 @@ import jwtDecode from 'jwt-decode';
   styleUrls: ['./viewcategory.component.css']
 })
 export class ViewcategoryComponent {
-  pageSize:number=10;
+  searchTerm:string='';
+  pageSize:number=0;
   from: number = 1;
   to: number = 10;
   collectionSize:number=0;
@@ -69,7 +70,11 @@ export class ViewcategoryComponent {
   pageChange(newPage:number){
     this.to=newPage*10;
     this.from=(this.to-10)+1;
-    this.url=`https://localhost:7084/api/category?from=${this.from}&to=${this.to}`;
+    this.url=`https://localhost:7084/api/category?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
+    this.getCategory();
+  }
+  onSearchChange(){
+    this.url=`https://localhost:7084/api/category?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
     this.getCategory();
   }
 }
