@@ -10,6 +10,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { NgToggleModule } from 'ng-toggle-button';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [
     ViewcategoryComponent,
@@ -24,7 +26,9 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgToggleModule,
     NgbPaginationModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
+    
   ]
 })
 export class CategoryModule { }

@@ -41,13 +41,13 @@
                         <td class="text-center" *ngIf="roleId===1">
                             <div class="d-flex flex-row justify-content-center">
                                 <div>
-                                    <fa-icon [icon]="updateIcon" [size]="sizeIcon" [style.color]="'black'" class="m-1"
+                                    <fa-icon matTooltip="Update"  [icon]="updateIcon" [size]="sizeIcon" [style.color]="'black'" class="m-1"
                                         style="font-size:20px" (click)="goToUpdateView(book.BookId)"></fa-icon>
-                                    <fa-icon class="m-1" [icon]="trashIcon" [style.color]="'rgb(195, 41, 41)'"
+                                    <fa-icon matTooltip="Delete" class="m-1" [icon]="trashIcon" [style.color]="'rgb(195, 41, 41)'"
                                         style="font-size:20px" (click)="deleteBook(book)"></fa-icon>
                                 </div>
                                 <div>
-                                    <ng-toggle [value]="book.toggleValue" [color]="{
+                                    <ng-toggle matTooltip="Update Status" [value]="book.toggleValue" [color]="{
                                         unchecked: 'rgb(184, 16, 16)',
                                         checked: '#067e00',                       
                                     }" (change)="toggleChanged(book.BookId)"></ng-toggle>

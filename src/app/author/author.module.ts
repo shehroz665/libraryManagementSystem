@@ -10,6 +10,8 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgToggleModule } from 'ng-toggle-button';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [
     ViewComponent,
@@ -25,6 +27,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     NgToggleModule,
     NgbPaginationModule,
     FormsModule,
+    MatTooltipModule
   ]
 })
 export class AuthorModule { }
