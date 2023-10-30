@@ -10,6 +10,7 @@ import { SizeProp } from '@fortawesome/fontawesome-svg-core';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
+  searchTerm:string='';
   page:number=1;
   pageSize :number=10;
   from: number = 1;
@@ -69,5 +70,9 @@ export class ViewComponent {
     this.from=(this.to-10)+1;
     this.url=`https://localhost:7084/api/author?from=${this.from}&to=${this.to}`;
     this.getAuthors();  
+  }
+  onSearchChange(){
+    console.log(this.searchTerm);
+    
   }
 }
