@@ -9,6 +9,7 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
   styleUrls: ['./viewbooks.component.css']
 })
 export class ViewbooksComponent {
+  searchTerm:string='';
   pageSize:number=10;
   from: number = 1;
   to: number = 10;
@@ -17,7 +18,7 @@ export class ViewbooksComponent {
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
   sizeIcon:SizeProp='1x';
-  url:string=`https://localhost:7084/api/books?from=${this.from}&to=${this.to}`;
+  url:string=`https://localhost:7084/api/books?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
   books:any[]=[];
   constructor (private router:Router,private api:ApiMethodsService){
     this.getBooks();
@@ -66,6 +67,10 @@ export class ViewbooksComponent {
     this.to=newPage*10;
     this.from=(this.to-10)+1;
     this.url=`https://localhost:7084/api/books?from=${this.from}&to=${this.to}`;
+    this.getBooks();
+  }
+  onSearchChange(){
+    this.url=`https://localhost:7084/api/books?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
     this.getBooks();
   }
 }

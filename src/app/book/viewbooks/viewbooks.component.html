@@ -4,8 +4,16 @@
             <div class="p-2 text-black ">
                 <h4 class="heading">View Books</h4>
             </div>
-            <div class="mx-2 my-2" *ngIf="roleId===1">
-                <button class="btn btn-primary" (click)="navigateToSpecificRoute()">Add Book</button>
+            <div class="mx-2 my-2 d-flex flex-row">
+                <div class="mx-2">
+                    <input type="search" class="form-control" [(ngModel)]="searchTerm"
+                    (ngModelChange)="onSearchChange()" placeholder="Search" />
+                </div>
+                <div>
+                    <button *ngIf="roleId==1" class="btn btn-primary" (click)="navigateToSpecificRoute()">Add Book</button>
+                </div>
+
+
             </div>
         </div>
         <div class="container">
@@ -56,8 +64,8 @@
                             </div>
                         </td>
                         <td *ngIf="roleId!==1" class="text-center"
-                            [ngStyle]="{'color': book.AvailableQuantity>0? 'green' : 'red'}">
-                            {{book.AvailableQuantity>0? 'Available' :'Not Available' }}
+                            [ngStyle]="{'color': book.AvailableQuantity>0 && book.Status===1? 'green' : 'red'}">
+                            {{book.AvailableQuantity>0 && book.Status===1? 'Available' :'Not Available' }}
                         </td>
                     </tr>
                 </tbody>
