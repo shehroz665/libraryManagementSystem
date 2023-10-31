@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router'
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
-import { faTrash ,faPenToSquare,faExpand,faArrowDown,faArrowUp} from '@fortawesome/free-solid-svg-icons';
+import { faTrash ,faPenToSquare,faChevronDown,faChevronUp} from '@fortawesome/free-solid-svg-icons';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view',
@@ -17,9 +18,8 @@ export class ViewComponent {
   roleId:number=0;
   updateIcon=faPenToSquare;
   trashIcon=faTrash;
-  expandIcon=faExpand;
-  upIcon=faArrowUp;
-  downIcon=faArrowDown;
+  upIcon=faChevronUp;
+  downIcon=faChevronDown;
   expand:boolean=false;
   url:string=`https://localhost:7084/api/author?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
   authors:any[]=[];
@@ -30,13 +30,18 @@ export class ViewComponent {
   getAuthors(){
     this.authorData.getDataFromApi(this.url).subscribe((response:any)=>{
       this.pageSize=response.data.count;
-      console.log(response.data.data);
+      
       
       this.authors=response.data.data.map((author:any)=> ({
         ...author,
+        Titles: author.Titles.split(', '),
+        Length:author.Titles.length,
         toggleValue:author.Status===1 ? true: false,
         isexpandRow:false,
+        
+   
       }));
+      console.log(this.authors);
     });
   
     

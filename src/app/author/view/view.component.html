@@ -41,26 +41,34 @@
                                     <fa-icon matTooltip="Delete" class="m-1" [icon]="trashIcon" [style.color]="'rgb(184, 16, 16)'"  style="font-size:20px"
                                         (click)="deleteAuthor(author)"></fa-icon>
                                     </div>
-                                    <fa-icon *ngIf="!author.isexpandRow" matTooltip="Hide Details" class="mx-1" [icon]="downIcon" [style.color]="'black'"  style="font-size:20px"
-                                    (click)="author.isexpandRow=!author.isexpandRow"
-                                    >  </fa-icon>
-                                    <fa-icon *ngIf="author.isexpandRow" matTooltip="Show Details" class="mx-1" [icon]="upIcon" [style.color]="'black'"  style="font-size:20px"
-                                    (click)="author.isexpandRow=!author.isexpandRow"
-                                    >
-                                    </fa-icon>
                                     <div >
                                         <ng-toggle matTooltip="Update Status" [value]="author.toggleValue" [color]="{
                                             unchecked: 'rgb(184, 16, 16)',
                                             checked: '#067e00',                       
                                         }" (change)="toggleChanged(author.AuthId)" ></ng-toggle>
+                                        <fa-icon *ngIf="!author.isexpandRow" matTooltip="Hide Details" class="mx-1" [icon]="downIcon" [style.color]="'black'"  style="font-size:20px"
+                                        (click)="author.isexpandRow=!author.isexpandRow"
+                                        > </fa-icon>
+                                        <fa-icon *ngIf="author.isexpandRow" matTooltip="Show Details" class="mx-1" [icon]="upIcon" [style.color]="'black'"  style="font-size:20px"
+                                        (click)="author.isexpandRow=!author.isexpandRow"
+                                        ></fa-icon>
                                     </div>
     
                                 </div>
                             </td>
                         </tr>
                         <tr *ngIf="author.isexpandRow">
-                            <td colspan="4" *ngIf="author.Titles">{{author.Titles}}</td>
-                            <td colspan="4" *ngIf="!author.Titles">No Book found</td>
+                            <td colspan="4" *ngIf="author.Titles != ''" class="bg-light">
+                                <div class="p-3">
+                                    <p class="font-weight-bold">Books owned by {{author.AuthName}}:</p>
+                                    <ul class="list-group">
+                                        <li *ngFor="let item of author.Titles" class="list-group-item">{{item}}</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td colspan="4" *ngIf="author.Length===0" class="bg-light text-left">
+                                <p class="p-3 font-weight-bold">No Books found</p>
+                            </td>
                         </tr>
                     </ng-container>
                 </tbody>
