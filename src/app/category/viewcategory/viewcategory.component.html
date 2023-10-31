@@ -29,28 +29,52 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let category of categories;index as i">
-                    <th scope="row">{{ from+i}}</th>
-                    <td class="text-left">{{  category.CatName }}</td>
-                    <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': category.Status===1? 'green' :'red'}">{{ category.Status===1? 'Active' :'Deactivated' }}</td>
-                    <td class="text-center" *ngIf="roleId===1">
-                        <div class="d-flex flex-row justify-content-center" >
-                            <div>
-                                <fa-icon matTooltip="Update" [icon]="updateIcon" [size]="sizeIcon" [style.color]="'black'" class="m-1" style="font-size:20px"
-                                (click)="goToUpdate(category.CatId)"></fa-icon>
-                            <fa-icon matTooltip="Delete" class="m-1" [icon]="trashIcon" [style.color]="'rgb(195, 41, 41)'" style="font-size:20px"
-                                (click)="deleteCategory(category)"></fa-icon>
+                <ng-container *ngFor="let category of categories;index as i">
+                    <tr >
+                        <th scope="row">{{ from+i}}</th>
+                        <td class="text-left">{{  category.CatName }}</td>
+                        <td *ngIf="roleId===1" class="text-center" [ngStyle]="{'color': category.Status===1? 'green' :'red'}">{{ category.Status===1? 'Active' :'Deactivated' }}</td>
+                        <td class="text-center" *ngIf="roleId===1">
+                            <div class="d-flex flex-row justify-content-center" >
+                                <div>
+                                    <fa-icon matTooltip="Update" [icon]="updateIcon" [size]="sizeIcon" [style.color]="'black'" class="m-1" style="font-size:20px"
+                                    (click)="goToUpdate(category.CatId)"></fa-icon>
+                                <fa-icon matTooltip="Delete" class="m-1" [icon]="trashIcon" [style.color]="'rgb(195, 41, 41)'" style="font-size:20px"
+                                    (click)="deleteCategory(category)"></fa-icon>
+                                </div>
+                                <div>
+                                    <ng-toggle matTooltip="Update Status" [value]="category.toggleValue" [color]="{
+                                        unchecked: 'rgb(184, 16, 16)',
+                                        checked: '#067e00',                       
+                                    }" (change)="toggleChanged(category.CatId)" ></ng-toggle>
+                                    <fa-icon *ngIf="!category.isexpandRow" matTooltip="Hide Details" class="mx-1" [icon]="downIcon" [style.color]="'black'"  style="font-size:20px"
+                                    (click)="category.isexpandRow=!category.isexpandRow"
+                                    > </fa-icon>
+                                    <fa-icon *ngIf="category.isexpandRow" matTooltip="Show Details" class="mx-1" [icon]="upIcon" [style.color]="'black'"  style="font-size:20px"
+                                    (click)="category.isexpandRow=!category.isexpandRow"
+                                    ></fa-icon>
+                                </div>
+    
                             </div>
-                            <div>
-                                <ng-toggle matTooltip="Update Status" [value]="category.toggleValue" [color]="{
-                                    unchecked: 'rgb(184, 16, 16)',
-                                    checked: '#067e00',                       
-                                }" (change)="toggleChanged(category.CatId)" ></ng-toggle>
+                        </td>
+                    </tr>
+                    <tr *ngIf="category.isexpandRow">
+                        <td colspan="4" *ngIf="category.Titles != ''" class="bg-light">
+                            <div class="p-3">
+                                <p class="font-weight-bold">The Category {{category.CatName}} have the following books:</p>
+                                <ul class="list-group">
+                                    <li *ngFor="let item of category.Titles" class="list-group-item">{{item}}</li>
+                                </ul>
                             </div>
+                         
+                        </td>
+                        <td colspan="4" *ngIf="category.Length===0" class="bg-light text-left">
+                            <p class="p-3 font-weight-bold">his category contains no books in our system</p>
+                        </td>
+                    </tr>
+                </ng-container>
+                
 
-                        </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         </div>

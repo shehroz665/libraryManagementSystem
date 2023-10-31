@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
 import { Router } from '@angular/router';
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrash,faChevronDown,faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 import jwtDecode from 'jwt-decode';
 @Component({
@@ -10,6 +10,8 @@ import jwtDecode from 'jwt-decode';
   styleUrls: ['./viewcategory.component.css']
 })
 export class ViewcategoryComponent {
+  upIcon=faChevronUp;
+  downIcon=faChevronDown;
   searchTerm:string='';
   pageSize:number=0;
   from: number = 1;
@@ -28,12 +30,15 @@ export class ViewcategoryComponent {
   }
   getCategory(){
     this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
-      console.log(response);
       this.collectionSize=response.data.count;
       this.categories=response.data.data.map((category:any)=>({
         ...category,
+        
+        Titles: category.Titles.split(', '),
+        Length:category.Titles.length,
+        isexpandRow:false,
         toggleValue:category.Status===1 ? true : false
-      }));
+      }));      
     });
   }
   toggleChanged(id:number){
