@@ -22,7 +22,6 @@
                 <tr >
                     <th scope="col">#</th>
                     <th scope="col" class="text-left">Genre</th>
-
                         <th scope="col" class="text-center" *ngIf="roleId===1">Status</th>
                         <th scope="col" class="text-center" *ngIf="roleId===1">Actions</th>
 
@@ -59,18 +58,46 @@
                         </td>
                     </tr>
                     <tr *ngIf="category.isexpandRow">
-                        <td colspan="4" *ngIf="category.Titles != ''" class="bg-light">
-                            <div class="p-3">
-                                <p class="font-weight-bold">The Category {{category.CatName}} have the following books:</p>
-                                <ul class="list-group">
-                                    <li *ngFor="let item of category.Titles" class="list-group-item">{{item}}</li>
-                                </ul>
-                            </div>
+                        <td colspan="4" *ngIf="category.Books.length!==0 else noBook" class="bg-light">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Book ID</th>
+                                        <th scope="col" class="text-left">Title</th>
+                                        <th scope="col" class="text-center">ISBN</th>
+                                        <th scope="col" class="text-center">Category</th>
+                                        <th scope="col" class="text-center">Author</th>
+                                        <th scope="col" class="text-center" *ngIf="roleId===1">Price</th>
+                                        <th scope="col" class="text-center" *ngIf="roleId===1">Actual Q.</th>
+                                        <th scope="col" class="text-center" *ngIf="roleId===1">Avaiable Q.</th>
+                                        <th scope="col" class="text-center" *ngIf="roleId===1">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let book of category.Books;index as i">
+                                        <th scope="row">{{ book.BookId }}</th>
+                                        <td class="text-left">{{ book.Title }}</td>
+                                        <td class="text-center">{{book.Isbn}}</td>
+                                        <td class="text-center">{{ book.CatName }}</td>
+                                        <td class="text-center">{{ book.AuthName }}</td>
+                                        <td class="text-center" *ngIf="roleId===1">{{ book.Price }}</td>
+                                        <td class="text-center" *ngIf="roleId===1">{{ book.ActualQuantity }}</td>
+                                        <td class="text-center" *ngIf="roleId===1">{{ book.AvailableQuantity }}</td>
+                                        <td *ngIf="roleId===1" class="text-center"
+                                            [ngStyle]="{'color': book.Status===1? 'green' : 'red'}">
+                                            {{book.Status===1? 'Active' :'Deactivated' }}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
                          
                         </td>
-                        <td colspan="4" *ngIf="category.Length===0" class="bg-light text-left">
-                            <p class="p-3 font-weight-bold">his category contains no books in our system</p>
-                        </td>
+                        <ng-template #noBook>
+                            <td colspan="4"  class="bg-light text-left">
+                                <p class="p-3 font-weight-bold">This category contains no books in our system</p>
+                            </td>
+                        </ng-template>
+        
                     </tr>
                 </ng-container>
                 

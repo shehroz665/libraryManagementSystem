@@ -3,7 +3,8 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
 import { Router } from '@angular/router';
 import { faPenToSquare, faTrash,faChevronDown,faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { SizeProp } from '@fortawesome/fontawesome-svg-core';
-import jwtDecode from 'jwt-decode';
+
+
 @Component({
   selector: 'app-viewcategory',
   templateUrl: './viewcategory.component.html',
@@ -31,14 +32,14 @@ export class ViewcategoryComponent {
   getCategory(){
     this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
       this.collectionSize=response.data.count;
+       console.log(response.data.data);
       this.categories=response.data.data.map((category:any)=>({
         ...category,
-        
-        Titles: category.Titles.split(', '),
-        Length:category.Titles.length,
         isexpandRow:false,
         toggleValue:category.Status===1 ? true : false
-      }));      
+      }));     
+      // console.log(this.categories);
+       
     });
   }
   toggleChanged(id:number){
