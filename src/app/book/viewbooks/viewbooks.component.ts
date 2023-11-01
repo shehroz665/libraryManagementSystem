@@ -25,7 +25,7 @@ export class ViewbooksComponent {
     this.roleId=this.api.decodeToken();
   }
   getBooks(){
-    this.api.getDataFromApi(this.url).subscribe((response:any)=>{
+    this.api.gettheBooks(this.url).subscribe((response:any)=>{
       this.collectionSize=response.data.count;
       this.books=response.data.data.map((book:any)=> ({
         ...book,
