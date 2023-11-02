@@ -7,10 +7,11 @@ import { AddcategoryComponent } from './addcategory/addcategory.component';
 import { UpdatecategoryComponent } from './updatecategory/updatecategory.component';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgToggleModule } from 'ng-toggle-button';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TokenInterceptor } from '../Interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,5 +31,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule
     
   ]
+  ,providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptor,
+      multi:true,
+    }
+    ],
 })
 export class CategoryModule { }

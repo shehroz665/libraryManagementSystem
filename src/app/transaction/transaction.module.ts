@@ -6,8 +6,9 @@ import { ViewtransactionComponent } from './viewtransaction/viewtransaction.comp
 import { AddtransactionComponent } from './addtransaction/addtransaction.component';
 import { UpdatetransactionComponent } from './updatetransaction/updatetransaction.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TokenInterceptor } from '../Interceptor/token.interceptor';
 
 
 @NgModule({
@@ -23,5 +24,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
   ]
+  ,providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptor,
+      multi:true,
+    }
+    ],
 })
 export class TransactionModule { }

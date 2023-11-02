@@ -6,7 +6,7 @@ import { ViewbooksComponent } from './viewbooks/viewbooks.component';
 import { AddbookComponent } from './addbook/addbook.component';
 import { UpdatebookComponent } from './updatebook/updatebook.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgToggleModule } from 'ng-toggle-button';
 import { IsbnFormatterPipe } from '../Pipes/isbn-formatter.pipe';
@@ -16,6 +16,7 @@ import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { TokenInterceptor } from '../Interceptor/token.interceptor';
 @NgModule({
   declarations: [
     ViewbooksComponent,
@@ -37,5 +38,12 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbPaginationModule
   ]
+  ,providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptor,
+      multi:true,
+    }
+    ],
 })
 export class BookModule { }

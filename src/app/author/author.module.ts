@@ -5,12 +5,13 @@ import { AuthorRoutingModule } from './author-routing.module';
 import { ViewComponent } from './view/view.component';
 import { AddComponent } from './add/add.component';
 import { UpdateComponent } from './update/update.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgToggleModule } from 'ng-toggle-button';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TokenInterceptor } from '../Interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,5 +30,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FormsModule,
     MatTooltipModule
   ]
+  ,providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptor,
+      multi:true,
+    }
+    ],
 })
 export class AuthorModule { }

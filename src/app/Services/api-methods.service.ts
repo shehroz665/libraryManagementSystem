@@ -26,27 +26,30 @@ export class ApiMethodsService {
 
   constructor(private http: HttpClient) { }
   getDataFromApi(url: string) {
-    var headers = new HttpHeaders().set("Authorization", `bearer ${localStorage.getItem('token')}`);
-    return this.http.get(url, { headers });
+   
+    return this.http.get(url);
   }
   postDataUsingApi(url: string, data: any) {
-    var headers = new HttpHeaders().set("Authorization", `bearer ${localStorage.getItem('token')}`);
-    return this.http.post(url, data, { headers });
+   
+    return this.http.post(url, data);
   }
   updateDataUsingApi(url: string, data: any) {
-    var headers = new HttpHeaders().set("Authorization", `bearer ${localStorage.getItem('token')}`);
-    return this.http.put(url, data, { headers });
+   
+    return this.http.put(url, data);
   }
   postOrUpdate(url: string, data: any, id: number) {
-    var headers = new HttpHeaders().set("Authorization", `bearer ${localStorage.getItem('token')}`);
+   
     if (id === 1) { //post
-      return this.http.post(url, data, { headers });
+      return this.http.post(url, data);
     }
     else {       //update
-      return this.http.put(url, data, { headers });
+      return this.http.put(url, data);
     }
   }
   login(url: string, data: any) {
+    return this.http.post(url, data);
+  }
+  signUp(url: string, data: any) {
     return this.http.post(url, data);
   }
   isLogin() {
@@ -96,7 +99,7 @@ export class ApiMethodsService {
     return studentOrTeacher;
   }
   gettheBooks(url:string):Observable<Books[]> {
-    var headers = new HttpHeaders().set("Authorization", `bearer ${localStorage.getItem('token')}`);
-    return this.http.get<Books[]>(url, { headers });
+   
+    return this.http.get<Books[]>(url);
   }
 }
