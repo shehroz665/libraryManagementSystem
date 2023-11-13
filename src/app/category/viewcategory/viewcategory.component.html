@@ -46,10 +46,11 @@
                                         unchecked: 'rgb(184, 16, 16)',
                                         checked: '#067e00',                       
                                     }" (change)="toggleChanged(category.CatId)" ></ng-toggle>
-                                    <fa-icon *ngIf="!category.isexpandRow" matTooltip="Hide Details" class="mx-1" [icon]="downIcon" [style.color]="'black'"  style="font-size:20px"
-                                    (click)="category.isexpandRow=!category.isexpandRow"
+                                    <fa-icon *ngIf="!category.isexpandRow" matTooltip="Show Details" class="mx-1" [icon]="downIcon" [style.color]="'black'"  style="font-size:20px"
+                                    (click)="toggleExpandRow(category)"
+                                    
                                     > </fa-icon>
-                                    <fa-icon *ngIf="category.isexpandRow" matTooltip="Show Details" class="mx-1" [icon]="upIcon" [style.color]="'black'"  style="font-size:20px"
+                                    <fa-icon *ngIf="category.isexpandRow" matTooltip="Hide Details" class="mx-1" [icon]="upIcon" [style.color]="'black'"  style="font-size:20px"
                                     (click)="category.isexpandRow=!category.isexpandRow"
                                     ></fa-icon>
                                 </div>
@@ -58,7 +59,7 @@
                         </td>
                     </tr>
                     <tr *ngIf="category.isexpandRow">
-                        <td colspan="4" *ngIf="category.Books.length!==0 else noBook" class="bg-light">
+                        <td colspan="4" *ngIf="bookDetail.length!==0 else noBook" class="bg-light">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -74,12 +75,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let book of category.Books;index as i">
+                                    <tr *ngFor="let book of bookDetail;index as i">
                                         <th scope="row">{{ book.BookId }}</th>
                                         <td class="text-left">{{ book.Title }}</td>
                                         <td class="text-center">{{book.Isbn}}</td>
-                                        <td class="text-center">{{ book.CatName }}</td>
-                                        <td class="text-center">{{ book.AuthName }}</td>
+                                        <td class="text-center">{{ book.BookCatName }}</td>
+                                        <td class="text-center">{{ book.BookAuthName }}</td>
                                         <td class="text-center" *ngIf="roleId===1">{{ book.Price }}</td>
                                         <td class="text-center" *ngIf="roleId===1">{{ book.ActualQuantity }}</td>
                                         <td class="text-center" *ngIf="roleId===1">{{ book.AvailableQuantity }}</td>

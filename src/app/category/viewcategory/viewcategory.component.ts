@@ -19,7 +19,8 @@ export class ViewcategoryComponent {
   to: number = 10;
   collectionSize:number=0;
   roleId:number=0;
-  url:string=`https://localhost:7084/api/category?from=${this.from}&to=${this.to}`;
+  bookDetail:any=[];
+  url:string=`https://localhost:7084/api/category/getAllCat?from=${this.from}&to=${this.to}`;
   token:any=localStorage.getItem("token");
   categories:any[]=[];
   updateIcon=faPenToSquare;
@@ -32,7 +33,7 @@ export class ViewcategoryComponent {
   getCategory(){
     this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
       this.collectionSize=response.data.count;
-       console.log(response.data.data);
+      // console.log(response.data.data);
       this.categories=response.data.data.map((category:any)=>({
         ...category,
         isexpandRow:false,
@@ -76,11 +77,18 @@ export class ViewcategoryComponent {
   pageChange(newPage:number){
     this.to=newPage*10;
     this.from=(this.to-10)+1;
-    this.url=`https://localhost:7084/api/category?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
+    this.url=`https://localhost:7084/api/category/getAllCat?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
     this.getCategory();
   }
   onSearchChange(){
-    this.url=`https://localhost:7084/api/category?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
+    this.url=`https://localhost:7084/api/category/getAllCat?from=${this.from}&to=${this.to}&searchTerm=${this.searchTerm}`;
     this.getCategory();
+  }
+  toggleExpandRow(category: any): void {
+    category.isexpandRow = !category.isexpandRow;
+    this.apiData.getDataFromApi(`https://localhost:7084/api/category/getAllCat/${category.CatId}`).subscribe((response:any)=> {
+      // console.log(response.data.data[0].Books);
+      this.bookDetail=response.data.data[0].Books;
+    })
   }
 }
