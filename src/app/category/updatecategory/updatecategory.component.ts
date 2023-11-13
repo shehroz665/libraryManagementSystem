@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
-
+import {faXmark} from '@fortawesome/free-solid-svg-icons'
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-updatecategory',
   templateUrl: './updatecategory.component.html',
@@ -10,11 +11,12 @@ import { ApiMethodsService } from 'src/app/Services/api-methods.service';
 })
 export class UpdatecategoryComponent {
   id:number=0;
+  closeIcon=faXmark;
   url:string='https://localhost:7084/api/category';
   categoryFormData=new FormGroup({
     CatName:new FormControl('',[Validators.required])
   });
-  constructor(private router:Router,private api:ApiMethodsService,private routeWithId:ActivatedRoute ){
+  constructor(private router:Router,private api:ApiMethodsService,private routeWithId:ActivatedRoute,private location:Location ){
     this.routeWithId.params.subscribe((param)=> {
       this.id=param['id'];
     })
@@ -54,5 +56,8 @@ export class UpdatecategoryComponent {
     this.api.errorAlert('Please fill the forms fields...');
    }
     
+  }
+  goBack(){
+    this.location.back();
   }
 }

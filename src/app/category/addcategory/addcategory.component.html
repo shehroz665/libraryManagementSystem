@@ -4,19 +4,19 @@
             <div class="p-2 text-black">
                 <h4 class="heading">Add Category</h4>
             </div>
+            <div>
+                <fa-icon matTooltip="Close" class="mx-1" [icon]="closeIcon" [style.color]="'black'"
+                    style="font-size:20px"  (click)="goBack()"></fa-icon>
+            </div>
         </div>
         <div>
-            <form [formGroup]="categoryFormData" (ngSubmit)="postData()" >
+            <form [formGroup]="categoryFormData" (ngSubmit)="postData()">
                 <div class="form-group m-2">
                     <label for="CatName" class="mb-2">Category Name</label>
-                    <input
-                        id="CatName"
-                        name="CatName"
-                        formControlName="CatName"
-                        class="form-control"
-                        autocomplete="off"
-                    />
-                    <span style="color: red;" *ngIf="catName && catName.invalid && catName.touched">This field is required</span>
+                    <input id="CatName" name="CatName" formControlName="CatName" class="form-control"
+                        autocomplete="off" />
+                    <span style="color: red;" *ngIf="catName && catName.invalid && catName.touched">This field is
+                        required</span>
                 </div>
                 <button type="submit" class="btn btn-primary m-2 p-2" style="width: 100px;">Add</button>
             </form>

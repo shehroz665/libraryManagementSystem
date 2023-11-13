@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiMethodsService } from 'src/app/Services/api-methods.service';
+import {faXmark} from '@fortawesome/free-solid-svg-icons'
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-addcategory',
   templateUrl: './addcategory.component.html',
   styleUrls: ['./addcategory.component.css']
 })
 export class AddcategoryComponent {
-  constructor(private router:Router,private api:ApiMethodsService){}
+  constructor(private router:Router,private api:ApiMethodsService,private location:Location){}
+  closeIcon=faXmark;
   url:string='https://localhost:7084/api/category';
   categoryFormData=new FormGroup({
     CatName:new FormControl('',[Validators.required])
@@ -38,6 +41,9 @@ export class AddcategoryComponent {
     this.api.errorAlert('Please fill the forms fields...');
    }
     
+  }
+  goBack(){
+    this.location.back();
   }
 
 }
