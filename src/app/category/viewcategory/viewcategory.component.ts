@@ -30,7 +30,7 @@ export class ViewcategoryComponent {
   categoryStatusBucket:number[]=[];
   changeOccured:boolean=false;
   sizeIcon: SizeProp = '1x';
-  showCatId:number[]=[];
+  showCatIdBucket:number[]=[];
   constructor(private router: Router, private apiData: ApiMethodsService) {
     this.getCategory();
     this.roleId = this.apiData.decodeToken();
@@ -89,12 +89,21 @@ export class ViewcategoryComponent {
     this.getCategory();
   }
   toggleExpandRow(category: any): void {
+    this.showCatIdBucket.forEach(id => {
+      const updatedBookIndex = this.categories.findIndex((cat: any) => cat.CatId === id);
+      this.categories[updatedBookIndex].isexpandRow=false;
+    });
+    this.showCatIdBucket=[];
+    this.showCatIdBucket.push(category.CatId)
     category.isexpandRow = !category.isexpandRow;
-    
     this.apiData.getDataFromApi(`https://localhost:7084/api/category/getAllCat/${category.CatId}`).subscribe((response: any) => {
       this.bookDetail = response.data.data[0].Books;
     })
   }
+  toggleHideRow(category:any):void{
+    category.isexpandRow=!category.isexpandRow
+  }
+ 
   toggleBookChanged(book: any) {
     this.bookStatusBucket.push(book.BookId)
   }

@@ -52,7 +52,7 @@
                                     
                                     > </fa-icon>
                                     <fa-icon *ngIf="category.isexpandRow" matTooltip="Hide Details" class="mx-1" [icon]="upIcon" [style.color]="'black'"  style="font-size:20px"
-                                    (click)="category.isexpandRow=!category.isexpandRow"
+                                    (click)="toggleHideRow(category)"
                                     ></fa-icon>
                                 </div>
     
