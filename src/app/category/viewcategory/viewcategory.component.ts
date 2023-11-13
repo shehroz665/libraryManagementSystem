@@ -33,14 +33,11 @@ export class ViewcategoryComponent {
   getCategory(){
     this.apiData.getDataFromApi(this.url).subscribe((response:any)=>{
       this.collectionSize=response.data.count;
-      // console.log(response.data.data);
       this.categories=response.data.data.map((category:any)=>({
         ...category,
         isexpandRow:false,
         toggleValue:category.Status===1 ? true : false
       }));     
-      // console.log(this.categories);
-       
     });
   }
   toggleChanged(id:number){
@@ -87,8 +84,20 @@ export class ViewcategoryComponent {
   toggleExpandRow(category: any): void {
     category.isexpandRow = !category.isexpandRow;
     this.apiData.getDataFromApi(`https://localhost:7084/api/category/getAllCat/${category.CatId}`).subscribe((response:any)=> {
-      // console.log(response.data.data[0].Books);
       this.bookDetail=response.data.data[0].Books;
     })
+  }
+  toggleBookChanged(book:any){
+
+    this.apiData.updateDataUsingApi(`https://localhost:7084/api/books/changeStatus/${book.BookId}`,{}).subscribe((response:any)=>{
+      if(response.statuscode===200){
+        this.apiData.successAlert(response.message);
+        book.Status=response.data.Status;
+      }
+      else{
+        this.apiData.errorAlert(response.message);
+      }
+    });
+    
   }
 }

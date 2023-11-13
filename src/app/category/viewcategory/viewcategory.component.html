@@ -68,10 +68,11 @@
                                         <th scope="col" class="text-center">ISBN</th>
                                         <th scope="col" class="text-center">Category</th>
                                         <th scope="col" class="text-center">Author</th>
-                                        <th scope="col" class="text-center" *ngIf="roleId===1">Price</th>
-                                        <th scope="col" class="text-center" *ngIf="roleId===1">Actual Q.</th>
-                                        <th scope="col" class="text-center" *ngIf="roleId===1">Avaiable Q.</th>
-                                        <th scope="col" class="text-center" *ngIf="roleId===1">Status</th>
+                                        <th scope="col" class="text-center" >Price</th>
+                                        <th scope="col" class="text-center" >Actual Q.</th>
+                                        <th scope="col" class="text-center" >Avaiable Q.</th>
+                                        <th scope="col" class="text-center" >Status</th>
+                                        <th scope="col" class="text-center" >Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,12 +82,18 @@
                                         <td class="text-center">{{book.Isbn}}</td>
                                         <td class="text-center">{{ book.BookCatName }}</td>
                                         <td class="text-center">{{ book.BookAuthName }}</td>
-                                        <td class="text-center" *ngIf="roleId===1">{{ book.Price }}</td>
-                                        <td class="text-center" *ngIf="roleId===1">{{ book.ActualQuantity }}</td>
-                                        <td class="text-center" *ngIf="roleId===1">{{ book.AvailableQuantity }}</td>
-                                        <td *ngIf="roleId===1" class="text-center"
+                                        <td class="text-center" >{{ book.Price }}</td>
+                                        <td class="text-center" >{{ book.ActualQuantity }}</td>
+                                        <td class="text-center" >{{ book.AvailableQuantity }}</td>
+                                        <td  class="text-center"
                                             [ngStyle]="{'color': book.Status===1? 'green' : 'red'}">
                                             {{book.Status===1? 'Active' :'Deactivated' }}</td>
+                                        <td class="text-center">
+                                            <ng-toggle matTooltip="Update Status" [value]="book.Status" [color]="{
+                                                unchecked: 'rgb(184, 16, 16)',
+                                                checked: '#067e00',                       
+                                            }" (change)="toggleBookChanged(book)" ></ng-toggle>
+                                        </td>
                                     </tr>
 
                                 </tbody>
