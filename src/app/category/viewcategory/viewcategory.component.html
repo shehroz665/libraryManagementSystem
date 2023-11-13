@@ -9,8 +9,9 @@
                     <input type="search" class="form-control" [(ngModel)]="searchTerm"
                     (ngModelChange)="onSearchChange()" placeholder="Search" />
                 </div>
-                <div>
-                    <button *ngIf="roleId==1" class="btn btn-primary" (click)="navigateToSpecificRoute()">Add Category</button>
+                <div class="d-flex flex-row justify-content-between">
+                    <button *ngIf="roleId==1" class="btn btn-primary mx-2" (click)="navigateToSpecificRoute()">Add Category</button>
+                    <button class="btn btn-warning text-white" (click)="saveChanges()">Save Changes</button>
                 </div>
 
 
@@ -28,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let category of categories;index as i">
+                <ng-container *ngFor="let category of categories;index as i;trackBy:trackById">
                     <tr >
                         <th scope="row">{{ from+i}}</th>
                         <td class="text-left">{{  category.CatName }}</td>
@@ -98,7 +99,6 @@
 
                                 </tbody>
                             </table>
-                         
                         </td>
                         <ng-template #noBook>
                             <td colspan="4"  class="bg-light text-left">
