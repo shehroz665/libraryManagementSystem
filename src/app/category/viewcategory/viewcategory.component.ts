@@ -129,7 +129,7 @@ export class ViewcategoryComponent {
   }
   saveChanges() {
     if (this.bookStatusBucket.length != 0) {
-      console.log(this.bookStatusBucket);
+      // console.log(this.bookStatusBucket);
       
       this.bookStatusBucket = Array.from(new Set(this.bookStatusBucket));
       this.bookStatusBucket.forEach(i => {
