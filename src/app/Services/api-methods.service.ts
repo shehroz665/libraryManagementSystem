@@ -38,11 +38,10 @@ export class ApiMethodsService {
     return this.http.put(url, data);
   }
   postOrUpdate(url: string, data: any, id: number) {
-   
-    if (id === 1) { //post
+    if (id === 1) { 
       return this.http.post(url, data);
     }
-    else {       //update
+    else {
       return this.http.put(url, data);
     }
   }

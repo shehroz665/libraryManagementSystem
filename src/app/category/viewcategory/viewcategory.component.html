@@ -60,7 +60,7 @@
                         </td>
                     </tr>
                     <tr *ngIf="category.isexpandRow">
-                        <td colspan="4" *ngIf="bookDetail.length!==0 else noBook" class="bg-light">
+                            <td colspan="4" *ngIf="checkBooksExist(category.CatId) else noBook" class="bg-light">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -77,7 +77,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let book of bookDetail;index as i">
+                                        <tr *ngFor="let book of getBooksForCategory(category.CatId);index as i">
                                         <th scope="row">{{ book.BookId }}</th>
                                         <td class="text-left">{{ book.Title }}</td>
                                         <td class="text-center">{{book.Isbn}}</td>
@@ -96,7 +96,6 @@
                                             }" (change)="toggleBookChanged(book)" ></ng-toggle>
                                         </td>
                                     </tr>
-
                                 </tbody>
                             </table>
                         </td>

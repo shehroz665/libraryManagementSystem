@@ -89,23 +89,33 @@ export class ViewcategoryComponent {
     this.getCategory();
   }
   toggleExpandRow(category: any): void {
-    this.showCatIdBucket.forEach(id => {
-      const updatedBookIndex = this.categories.findIndex((cat: any) => cat.CatId === id);
-      this.categories[updatedBookIndex].isexpandRow=false;
-    });
-    this.showCatIdBucket=[];
-    this.showCatIdBucket.push(category.CatId)
     category.isexpandRow = !category.isexpandRow;
-    this.apiData.getDataFromApi(`https://localhost:7084/api/category/getAllCat/${category.CatId}`).subscribe((response: any) => {
-      this.bookDetail = response.data.data[0].Books;
-    })
+    const existCategory = this.bookDetail.findIndex((detail: any) => detail.CategoryId === category.CatId);
+    if(existCategory===-1){
+      this.apiData.getDataFromApi(`https://localhost:7084/api/category/getAllCat/${category.CatId}`).subscribe((response: any) => {       
+            if(response.data.data[0].Books.length!=0){
+              this.bookDetail.push({
+                CategoryId: category.CatId,
+                Books: response.data.data[0].Books,
+              });
+            }
+        })
+    }
   }
   toggleHideRow(category:any):void{
     category.isexpandRow=!category.isexpandRow
   }
  
   toggleBookChanged(book: any) {
-    this.bookStatusBucket.push(book.BookId)
+    this.bookStatusBucket.push(book.BookId);
+    const existCategory= this.bookDetail.findIndex((detail:any)=> detail.CategoryId===book.BookCatId);
+    const existBook= this.bookDetail[existCategory].Books.findIndex((i:any)=> i.BookId===book.BookId);
+      if(this.bookDetail[existCategory].Books[existBook].Status===1){
+        this.bookDetail[existCategory].Books[existBook].Status=2;
+      }
+      else{
+        this.bookDetail[existCategory].Books[existBook].Status=1;
+      }
   }
   saveChanges() {
     if (this.bookStatusBucket.length != 0) {
@@ -113,11 +123,10 @@ export class ViewcategoryComponent {
       this.bookStatusBucket.forEach(id => {
         this.apiData.updateDataUsingApi(`https://localhost:7084/api/books/changeStatus/${id}`, {}).subscribe((response: any) => {
           if (response.statuscode === 200) {
-            // this.apiData.successAlert(response.message);
+            this.apiData.successAlert(response.message);
             const updatedBookIndex = this.bookDetail.findIndex((book: any) => book.BookId === id);
             if (updatedBookIndex !== -1) {
               this.bookDetail[updatedBookIndex].Status = response.data.Status;
-              this.changeOccured=true;
             }
           }
           else {
@@ -133,8 +142,7 @@ export class ViewcategoryComponent {
       this.categoryStatusBucket.forEach(id => {
         this.apiData.updateDataUsingApi(`https://localhost:7084/api/category/changeStatus/${id}`, {}).subscribe((response: any) => {
           if (response.statuscode === 200) {
-            // this.apiData.successAlert(response.message);
-            this.changeOccured=true;
+            this.apiData.successAlert(response.message);
             this.getCategory();
           }
           else {
@@ -152,8 +160,7 @@ export class ViewcategoryComponent {
        var deleteUrl = `https://localhost:7084/api/category/delete/${id}`;
        this.apiData.updateDataUsingApi(deleteUrl, {}).subscribe((response: any) => {
         if (response.statuscode === 200) {
-          // this.apiData.successAlert(response.message);
-          this.changeOccured=true;
+          this.apiData.successAlert(response.message);
           this.getCategory();
         }
         else {
@@ -165,11 +172,16 @@ export class ViewcategoryComponent {
       
 
     }
-    if(this.changeOccured){
-      this.apiData.successAlert("Changes are applied..!");
-    }
   }
   trackById(index:number,item:any):number{
     return item.CatId;
+  }
+  getBooksForCategory(catId:number):any[]{
+    const existCategory=this.bookDetail.findIndex((res:any)=> res.CategoryId===catId);
+    return existCategory !== -1 ? this.bookDetail[existCategory].Books : [];
+  }
+  checkBooksExist(catId:number):boolean{
+    const existCategory=this.bookDetail.findIndex((res:any)=> res.CategoryId===catId);
+    return existCategory !== -1 ? true : false;
   }
 }
