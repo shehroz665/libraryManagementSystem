@@ -25,12 +25,11 @@ export class ViewcategoryComponent {
   categories: any[] = [];
   updateIcon = faPenToSquare;
   trashIcon = faTrash;
-  bookStatusBucket: number[] = [];
+  bookStatusBucket: any[] = [];
   categoryDeleteBucket: number[] = [];
   categoryStatusBucket: any[] = [];
   changeOccured: boolean = false;
   sizeIcon: SizeProp = '1x';
-  showCatIdBucket: number[] = [];
   constructor(private router: Router, private apiData: ApiMethodsService) {
     this.getCategory();
     this.roleId = this.apiData.decodeToken();
@@ -92,9 +91,15 @@ export class ViewcategoryComponent {
     if (existCategory === -1) {
       this.apiData.getDataFromApi(`https://localhost:7084/api/category/getAllCat/${category.CatId}`).subscribe((response: any) => {
         if (response.data.data[0].Books.length != 0) {
+          const myBooks = response.data.data[0].Books.map((book:any)=>{
+            return {
+              ...book,
+              toggleValue:book.Status===1? true: false,
+            }
+          })
           this.bookDetail.push({
             CategoryId: category.CatId,
-            Books: response.data.data[0].Books,
+            Books: myBooks,
           });
         }
       })
@@ -105,7 +110,14 @@ export class ViewcategoryComponent {
   }
 
   toggleBookChanged(book: any) {
-    this.bookStatusBucket.push(book.BookId);
+    const existingIndex= this.bookStatusBucket.findIndex((res:any)=> res.BookId===book.BookId);
+    if(existingIndex!=-1){
+      this.bookStatusBucket.splice(existingIndex,1);
+    }
+    this.bookStatusBucket.push({
+      id:book.BookId,
+      status:book.toggleValue? 1 : 0
+    });
     const existCategory = this.bookDetail.findIndex((detail: any) => detail.CategoryId === book.BookCatId);
     const existBook = this.bookDetail[existCategory].Books.findIndex((i: any) => i.BookId === book.BookId);
     if (this.bookDetail[existCategory].Books[existBook].Status === 1) {
@@ -117,15 +129,16 @@ export class ViewcategoryComponent {
   }
   saveChanges() {
     if (this.bookStatusBucket.length != 0) {
+      console.log(this.bookStatusBucket);
+      
       this.bookStatusBucket = Array.from(new Set(this.bookStatusBucket));
-      this.bookStatusBucket.forEach(id => {
-        let status = this.bookDetail
-        this.apiData.updateDataUsingApi(`https://localhost:7084/api/books/changeStatus/${id}`, {}).subscribe((response: any) => {
+      this.bookStatusBucket.forEach(i => {
+        this.apiData.updateDataUsingApi(`https://localhost:7084/api/books/changeStatus/${i.id}`, {status:i.status}).subscribe((response: any) => {
           if (response.statuscode === 200) {
             this.apiData.successAlert(response.message);
-            const updatedBookIndex = this.bookDetail.findIndex((book: any) => book.BookId === id);
+            const updatedBookIndex = this.bookDetail.findIndex((book: any) => book.BookId === i.id);
             if (updatedBookIndex !== -1) {
-              this.bookDetail[updatedBookIndex].Status = response.data.Status;
+              this.bookDetail[updatedBookIndex].toggleValue = response.data.Status===1? true : false;
             }
           }
           else {
