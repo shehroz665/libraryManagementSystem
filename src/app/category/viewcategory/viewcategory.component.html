@@ -43,10 +43,10 @@
                                     (click)="deleteCategory(category)"></fa-icon>
                                 </div>
                                 <div>
-                                    <ng-toggle matTooltip="Update Status" [value]="category.toggleValue" [color]="{
+                                    <ng-toggle matTooltip="Update Status" [(ngModel)]="category.toggleValue"  [color]="{
                                         unchecked: 'rgb(184, 16, 16)',
                                         checked: '#067e00',                       
-                                    }" (change)="toggleChanged(category.CatId)" ></ng-toggle>
+                                    }" (change)="toggleChanged(category)" ></ng-toggle>
                                     <fa-icon *ngIf="!category.isexpandRow" matTooltip="Show Details" class="mx-1" [icon]="downIcon" [style.color]="'black'"  style="font-size:20px"
                                     (click)="toggleExpandRow(category)"
                                     

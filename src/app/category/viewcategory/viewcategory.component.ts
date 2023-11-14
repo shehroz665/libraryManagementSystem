@@ -26,11 +26,11 @@ export class ViewcategoryComponent {
   updateIcon = faPenToSquare;
   trashIcon = faTrash;
   bookStatusBucket: number[] = [];
-  categoryDeleteBucket:number[]=[];
-  categoryStatusBucket:number[]=[];
-  changeOccured:boolean=false;
+  categoryDeleteBucket: number[] = [];
+  categoryStatusBucket: any[] = [];
+  changeOccured: boolean = false;
   sizeIcon: SizeProp = '1x';
-  showCatIdBucket:number[]=[];
+  showCatIdBucket: number[] = [];
   constructor(private router: Router, private apiData: ApiMethodsService) {
     this.getCategory();
     this.roleId = this.apiData.decodeToken();
@@ -45,18 +45,16 @@ export class ViewcategoryComponent {
       }));
     });
   }
-  toggleChanged(id: number) {
-    this.categoryStatusBucket.push(id);
-    // this.apiData.updateDataUsingApi(`https://localhost:7084/api/category/changeStatus/${id}`, {}).subscribe((response: any) => {
-    //   if (response.statuscode === 200) {
-    //     this.apiData.successAlert(response.message);
-    //     this.getCategory();
-    //   }
-    //   else {
-    //     this.apiData.errorAlert(response.message);
-    //   }
-    // });
-
+  toggleChanged(category: any) {
+    const existingIndex = this.categoryStatusBucket.findIndex(item => item.id === category.CatId);
+    if (existingIndex !== -1) {
+      this.categoryStatusBucket.splice(existingIndex, 1);
+    }
+    this.categoryStatusBucket.push(
+      {
+        id: category.CatId,
+        status: category.toggleValue ? 1 : 0
+      });
   }
   goToUpdate(id: number) {
     this.router.navigate(['home/category/update', id]);
@@ -91,36 +89,37 @@ export class ViewcategoryComponent {
   toggleExpandRow(category: any): void {
     category.isexpandRow = !category.isexpandRow;
     const existCategory = this.bookDetail.findIndex((detail: any) => detail.CategoryId === category.CatId);
-    if(existCategory===-1){
-      this.apiData.getDataFromApi(`https://localhost:7084/api/category/getAllCat/${category.CatId}`).subscribe((response: any) => {       
-            if(response.data.data[0].Books.length!=0){
-              this.bookDetail.push({
-                CategoryId: category.CatId,
-                Books: response.data.data[0].Books,
-              });
-            }
-        })
+    if (existCategory === -1) {
+      this.apiData.getDataFromApi(`https://localhost:7084/api/category/getAllCat/${category.CatId}`).subscribe((response: any) => {
+        if (response.data.data[0].Books.length != 0) {
+          this.bookDetail.push({
+            CategoryId: category.CatId,
+            Books: response.data.data[0].Books,
+          });
+        }
+      })
     }
   }
-  toggleHideRow(category:any):void{
-    category.isexpandRow=!category.isexpandRow
+  toggleHideRow(category: any): void {
+    category.isexpandRow = !category.isexpandRow
   }
- 
+
   toggleBookChanged(book: any) {
     this.bookStatusBucket.push(book.BookId);
-    const existCategory= this.bookDetail.findIndex((detail:any)=> detail.CategoryId===book.BookCatId);
-    const existBook= this.bookDetail[existCategory].Books.findIndex((i:any)=> i.BookId===book.BookId);
-      if(this.bookDetail[existCategory].Books[existBook].Status===1){
-        this.bookDetail[existCategory].Books[existBook].Status=2;
-      }
-      else{
-        this.bookDetail[existCategory].Books[existBook].Status=1;
-      }
+    const existCategory = this.bookDetail.findIndex((detail: any) => detail.CategoryId === book.BookCatId);
+    const existBook = this.bookDetail[existCategory].Books.findIndex((i: any) => i.BookId === book.BookId);
+    if (this.bookDetail[existCategory].Books[existBook].Status === 1) {
+      this.bookDetail[existCategory].Books[existBook].Status = 2;
+    }
+    else {
+      this.bookDetail[existCategory].Books[existBook].Status = 1;
+    }
   }
   saveChanges() {
     if (this.bookStatusBucket.length != 0) {
       this.bookStatusBucket = Array.from(new Set(this.bookStatusBucket));
       this.bookStatusBucket.forEach(id => {
+        let status = this.bookDetail
         this.apiData.updateDataUsingApi(`https://localhost:7084/api/books/changeStatus/${id}`, {}).subscribe((response: any) => {
           if (response.statuscode === 200) {
             this.apiData.successAlert(response.message);
@@ -135,12 +134,11 @@ export class ViewcategoryComponent {
         });
 
       });
-       this.bookStatusBucket = [];
+      this.bookStatusBucket = [];
     }
-    if(this.categoryStatusBucket.length!=0){
-      this.categoryStatusBucket=Array.from(new Set(this.categoryStatusBucket));
-      this.categoryStatusBucket.forEach(id => {
-        this.apiData.updateDataUsingApi(`https://localhost:7084/api/category/changeStatus/${id}`, {}).subscribe((response: any) => {
+    if (this.categoryStatusBucket.length != 0) {
+      this.categoryStatusBucket.forEach(i => {
+        this.apiData.updateDataUsingApi(`https://localhost:7084/api/category/changeStatus/${i.id}`, { status: i.status }).subscribe((response: any) => {
           if (response.statuscode === 200) {
             this.apiData.successAlert(response.message);
             this.getCategory();
@@ -150,38 +148,38 @@ export class ViewcategoryComponent {
           }
         });
       });
-      this.categoryStatusBucket=[];
-     
+      this.categoryStatusBucket = [];
+
 
     }
-    if(this.categoryDeleteBucket.length!=0){
-      this.categoryDeleteBucket= Array.from(new Set(this.categoryDeleteBucket));
-      this.categoryDeleteBucket.forEach((id)=> {
-       var deleteUrl = `https://localhost:7084/api/category/delete/${id}`;
-       this.apiData.updateDataUsingApi(deleteUrl, {}).subscribe((response: any) => {
-        if (response.statuscode === 200) {
-          this.apiData.successAlert(response.message);
-          this.getCategory();
-        }
-        else {
-          this.apiData.errorAlert(response.message);
-        }
-      })
+    if (this.categoryDeleteBucket.length != 0) {
+      this.categoryDeleteBucket = Array.from(new Set(this.categoryDeleteBucket));
+      this.categoryDeleteBucket.forEach((id) => {
+        var deleteUrl = `https://localhost:7084/api/category/delete/${id}`;
+        this.apiData.updateDataUsingApi(deleteUrl, {}).subscribe((response: any) => {
+          if (response.statuscode === 200) {
+            this.apiData.successAlert(response.message);
+            this.getCategory();
+          }
+          else {
+            this.apiData.errorAlert(response.message);
+          }
+        })
       });
-      this.categoryDeleteBucket=[];
-      
+      this.categoryDeleteBucket = [];
+
 
     }
   }
-  trackById(index:number,item:any):number{
+  trackById(index: number, item: any): number {
     return item.CatId;
   }
-  getBooksForCategory(catId:number):any[]{
-    const existCategory=this.bookDetail.findIndex((res:any)=> res.CategoryId===catId);
+  getBooksForCategory(catId: number): any[] {
+    const existCategory = this.bookDetail.findIndex((res: any) => res.CategoryId === catId);
     return existCategory !== -1 ? this.bookDetail[existCategory].Books : [];
   }
-  checkBooksExist(catId:number):boolean{
-    const existCategory=this.bookDetail.findIndex((res:any)=> res.CategoryId===catId);
+  checkBooksExist(catId: number): boolean {
+    const existCategory = this.bookDetail.findIndex((res: any) => res.CategoryId === catId);
     return existCategory !== -1 ? true : false;
   }
 }
